@@ -21,10 +21,10 @@ jobs:
           cd eConsciencia
           npm install -g vercel
 
-      - name: Pull Vercel Enviroment Information
+      - name: Pull Vercel Environment Information
         run:  |
           cd eConsciencia
-          vercel pull --yes --enviroment=preview --token=${{secrets.VERCEL_TOKEN}}
+          vercel pull --yes --environment=preview --token=${{secrets.VERCEL_TOKEN}}
 
       - name: Build Project Artifacts
         run:  |
