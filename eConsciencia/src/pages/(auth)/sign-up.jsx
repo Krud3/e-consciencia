@@ -53,7 +53,7 @@ export function LoginForm() {
         </div>
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}
-          <a href="#" className="underline">
+          <a href="/signin" className="underline">
             Sign in
           </a>
         </div>
