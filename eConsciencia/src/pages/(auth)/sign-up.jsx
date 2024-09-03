@@ -13,7 +13,7 @@ import useAuthStore from "@/store/use-auth-store";
 import { useNavigate, Link } from "react-router-dom"; 
 import { auth } from "../../../firebase.config.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { createUser } from "@/DAO/userDAO"; 
+import { createUser } from "@/DAO/userDao"; 
 
 export function SignUpForm() {
 
