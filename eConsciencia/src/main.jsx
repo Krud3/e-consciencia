@@ -4,7 +4,7 @@ import './index.css'
 import AuthComponent from './pages/(auth)/login.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginForm from './pages/(auth)/sign-up'
-import World from './World'
+import World from './pages/World'
 
 const router = createBrowserRouter([
   {
