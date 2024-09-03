@@ -11,9 +11,11 @@ import LogoSolo from "@/assets/SVG/logo-solo.svg";
 
 function AuthComponent() {
   const navigate = useNavigate();
+
   const loginGoogleWithPopup = useAuthStore((state) => state.loginGoogleWithPopup);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
 
   const handleLoginWithGoogle = async () => {
     try {

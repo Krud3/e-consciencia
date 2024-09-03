@@ -3,8 +3,10 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import AuthComponent from './pages/(auth)/login.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import SignUpForm from './pages/(auth)/sign-up'
 import World from './pages/World'
+
 
 const router = createBrowserRouter([
   {
