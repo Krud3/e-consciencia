@@ -1,14 +1,14 @@
 import React from "react";
-import { Button } from "@/components/ui/button"; // Asegúrate de que la ruta sea correcta
+import { Button } from "@/components/ui/button"; 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import useAuthStore from "@/store/use-auth-store"; // Ajusta la ruta según tu configuración
+import useAuthStore from "@/store/use-auth-store"; 
 import LogoSolo from "@/assets/SVG/logo-solo.svg";
 import {useNavigate} from "react-router-dom";
 
 function AuthComponent() {
   const navigate = useNavigate();
-  const loginGoogleWithPopup = useAuthStore((state)=>state.loginGoogleWithPopup); // Usamos solo la función de login con Google
+  const loginGoogleWithPopup = useAuthStore((state)=>state.loginGoogleWithPopup); 
   const handleLoginWithGoogle = async () => {
     try {
       await loginGoogleWithPopup();
