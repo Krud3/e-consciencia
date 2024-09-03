@@ -8,7 +8,8 @@ import { useNavigate, Link } from "react-router-dom"; // Importa Link desde reac
 
 function AuthComponent() {
   const navigate = useNavigate();
-  const loginGoogleWithPopup = useAuthStore((state) => state.loginGoogleWithPopup);
+
+  const loginGoogleWithPopup = useAuthStore((state)=>state.loginGoogleWithPopup); 
 
   const handleLoginWithGoogle = async () => {
     try {
