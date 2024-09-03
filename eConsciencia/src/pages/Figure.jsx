@@ -2,7 +2,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
-const Figure = ({ height = 1, distance = 0, direction = 1, speed = 1, amplitude = 1, frequency = 1, boundary = 5 }) => {
+const Figure = ({ height = 1, direction = 1, speed = 1, amplitude = 1, frequency = 1, boundary = 5 }) => {
     const boxRef = useRef();
     const directionRef = useRef(direction);
     
