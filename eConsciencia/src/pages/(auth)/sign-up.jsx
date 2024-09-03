@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@/components/ui/button"; // Ajusta la ruta según tu configuración
+import { Button } from "@/components/ui/button"; 
 import {
   Card,
   CardContent,
