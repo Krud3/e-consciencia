@@ -7,6 +7,7 @@ const provider = new GoogleAuthProvider();
 const useAuthStore = create((set) => ({
     user: null,
     loading: true,
+    
     loginGoogleWithPopup: async () => {
         await signInWithPopup(auth, provider)
         .then((result) => {
