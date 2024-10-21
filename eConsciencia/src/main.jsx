@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import SignUpForm from './pages/(auth)/sign-up'
 import World from './pages/World'
+import Home from './pages/Home'
 
 
 const router = createBrowserRouter([
@@ -20,7 +21,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/econsciencia", element: <World/>,
-  }
+  },
+  {
+    path: "/home", element: <Home/>,
+  },
 ])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
