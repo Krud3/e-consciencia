@@ -3,17 +3,23 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import AuthComponent from './pages/(auth)/login.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import LoginForm from './pages/(auth)/sign-up'
+
+import SignUpForm from './pages/(auth)/sign-up'
+import World from './pages/World'
+
 
 const router = createBrowserRouter([
   {
     path: "/", element: <AuthComponent/>,
   },
   {
-    path: "/signup", element: <LoginForm/>,
+    path: "/signup", element: <SignUpForm/>,
   },
   {
     path: "/signin", element: <AuthComponent/>,
+  },
+  {
+    path: "/econsciencia", element: <World/>,
   }
 ])
 createRoot(document.getElementById('root')).render(
