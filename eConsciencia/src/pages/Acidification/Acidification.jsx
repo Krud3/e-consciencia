@@ -7,7 +7,9 @@ const Acidification = () => {
   return (
     <>
         <Canvas>
-            
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[10, 10, 5]} intensity={1} />
+            <pointLight position={[0, 10, 0]} intensity={0.5} />
             <OrbitControls autorotate/>
             <SeaBlockWorld/>
         </Canvas>
