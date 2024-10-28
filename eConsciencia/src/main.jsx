@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import SignUpForm from './pages/(auth)/sign-up'
 import World from './pages/World'
-
+import { Toaster } from "@/components/ui/sonner"
 
 const router = createBrowserRouter([
   {
@@ -25,5 +25,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router ={router} />
+    <Toaster />
   </StrictMode>,
 )
