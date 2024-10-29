@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import SeaBlockWorld from "./models-3d/SeaBlockWorld";
 import { OrbitControls } from "@react-three/drei";
 import Lights from "./lights/Lights";
+import Footer from "@/components/Footer/Footer";
 const Acidification = () => {
   return (
     <>
@@ -12,6 +13,7 @@ const Acidification = () => {
             <OrbitControls autorotate/>
             <SeaBlockWorld/>
         </Canvas>
+        <Footer/>
         
     </>
   );
