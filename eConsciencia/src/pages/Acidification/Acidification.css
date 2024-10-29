@@ -11,3 +11,65 @@ body,
 canvas {
     touch-action: none;
   }
+
+.custom-card {
+    /* Puedes usar las variables de color que definiste en Tailwind */
+    border-radius: var(--radius);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+/* Tamaño y posición de la tarjeta */
+.fixed-card {
+    width: 190px; /* Cambia este valor según el tamaño que desees */
+    height: 300px; /* Cambia este valor según el tamaño que desees */
+    position: absolute; /* Permite posicionarla en un lugar específico de la pantalla */
+    top: 70px; /* Ajusta la distancia desde el borde superior */
+    right: 900px; /* Ajusta la distancia desde el borde derecho */
+    background-color: var(--card); /* Color de fondo */
+    border-radius: var(--radius); /* Borde redondeado */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    padding: 1rem;
+    z-index: 6; /* Asegura que la tarjeta esté sobre otros elementos */
+  }
+  
+/* Estilos para el encabezado */
+.custom-card-header {
+    border-bottom: 0.5px solid var(--border);
+    padding-bottom: 0.1rem;
+    margin-bottom: 0.1rem;
+  }
+  
+ 
+  /* Título de la tarjeta */
+  .custom-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--foreground);
+    max-width: 60%;
+  }
+  
+  /* Descripción de la tarjeta */
+  .custom-card-description {
+    font-size: 0.7rem;
+    color: var(--muted-foreground);
+  }
+  
+  /* Contenido de la tarjeta */
+  .custom-card-content {
+    font-size: 0.8rem;
+    color: var(--foreground);
+  }
+  
+  /* Pie de la tarjeta */
+  .custom-card-footer {
+    
+    font-size: 0.5rem;
+    color: var(--secondary-foreground);
+    text-align: justify;
+  }
+
+  .co2-image {
+    width: 75px;  /* Puedes ajustar el tamaño a tu gusto */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-bottom: 0px; /* Opcional: espacio debajo de la imagen */
+  }
