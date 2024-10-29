@@ -33,47 +33,53 @@ const SeaBlockWorld = (props) => {
             name="IslandMiddle"
             geometry={nodes.IslandMiddle.geometry}
             material={materials.IslandBottom}
+            castShadow
           />
           <mesh
             name="IslandTop"
             geometry={nodes.IslandTop.geometry}
             material={materials.IslandMiddle}
+            castShadow
           />
-          <mesh name="House" geometry={nodes.House.geometry} material={materials.House} />
-          <mesh name="Water" geometry={nodes.Water.geometry} material={materials.Water} />
-          <group name="Sand">
-            <mesh name="Cube008" geometry={nodes.Cube008.geometry} material={materials.Sand} />
+          <mesh name="House" geometry={nodes.House.geometry} material={materials.House} castShadow />
+          <mesh name="Water" geometry={nodes.Water.geometry} material={materials.Water} castShadow/>
+          <group name="Sand" >
+            <mesh name="Cube008" geometry={nodes.Cube008.geometry} material={materials.Sand} receiveShadow />
             <mesh
               name="Cube008_1"
               geometry={nodes.Cube008_1.geometry}
               material={materials.BlackCave}
+              receiveShadow
             />
           </group>
-          <mesh name="Stone0" geometry={nodes.Stone0.geometry} material={materials.Rock} />
-          <group name="IslandBottom">
+          <mesh name="Stone0" geometry={nodes.Stone0.geometry} material={materials.Rock} castShadow/>
+          <group name="IslandBottom" castShadow>
             <mesh
               name="Cube009"
               geometry={nodes.Cube009.geometry}
               material={materials.BeneathIsland}
+              castShadow
             />
             <mesh
               name="Cube009_1"
               geometry={nodes.Cube009_1.geometry}
               material={materials.BlackCave}
+              castShadow
             />
             <mesh
               name="Cube009_2"
               geometry={nodes.Cube009_2.geometry}
               material={materials.LessBlack}
+              castShadow
             />
           </group>
-          <mesh name="CO21" geometry={nodes.CO21.geometry} material={materials.Smoke} />
-          <mesh name="CO22" geometry={nodes.CO22.geometry} material={materials.Smoke} />
-          <mesh name="Seaweed0" geometry={nodes.Seaweed0.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed11" geometry={nodes.Seaweed11.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed12" geometry={nodes.Seaweed12.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed13" geometry={nodes.Seaweed13.geometry} material={materials.SeaWeed} />
-          <mesh name="Stone1" geometry={nodes.Stone1.geometry} material={materials.Rock} />
+          <mesh name="CO21" geometry={nodes.CO21.geometry} material={materials.Smoke} castShadow/>
+          <mesh name="CO22" geometry={nodes.CO22.geometry} material={materials.Smoke} castShadow/>
+          <mesh name="Seaweed0" geometry={nodes.Seaweed0.geometry} material={materials.SeaWeed} castShadow />
+          <mesh name="Seaweed11" geometry={nodes.Seaweed11.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Seaweed12" geometry={nodes.Seaweed12.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Seaweed13" geometry={nodes.Seaweed13.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Stone1" geometry={nodes.Stone1.geometry} material={materials.Rock} castShadow/>
           <mesh name="Starfish1" geometry={nodes.Starfish1.geometry} material={materials.Starfish} />
           <mesh name="Fish01" geometry={nodes.Fish01.geometry} material={materials.Fish} />
           <mesh name="Fish02" geometry={nodes.Fish02.geometry} material={materials.Fish} />
@@ -83,18 +89,18 @@ const SeaBlockWorld = (props) => {
           <mesh name="Fish06" geometry={nodes.Fish06.geometry} material={materials.Fish} />
           <mesh name="Fish07" geometry={nodes.Fish07.geometry} material={materials.Fish} />
           <mesh name="Fish00" geometry={nodes.Fish00.geometry} material={materials.Fish} />
-          <mesh name="Stone2" geometry={nodes.Stone2.geometry} material={materials.Rock} />
-          <mesh name="seaweed3" geometry={nodes.seaweed3.geometry} material={materials.SeaWeed} />
-          <mesh name="seaweed6" geometry={nodes.seaweed6.geometry} material={materials.SeaWeed} />
-          <mesh name="seaweed8" geometry={nodes.seaweed8.geometry} material={materials.SeaWeed} />
-          <mesh name="seaweed9" geometry={nodes.seaweed9.geometry} material={materials.SeaWeed} />
-          <mesh name="seaweed10" geometry={nodes.seaweed10.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed1" geometry={nodes.Seaweed1.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed2" geometry={nodes.Seaweed2.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed5" geometry={nodes.Seaweed5.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed7" geometry={nodes.Seaweed7.geometry} material={materials.SeaWeed} />
-          <mesh name="Seaweed4" geometry={nodes.Seaweed4.geometry} material={materials.SeaWeed} />
-          <mesh name="Stone3" geometry={nodes.Stone3.geometry} material={materials.Rock} />
+          <mesh name="Stone2" geometry={nodes.Stone2.geometry} material={materials.Rock} castShadow/>
+          <mesh name="seaweed3" geometry={nodes.seaweed3.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="seaweed6" geometry={nodes.seaweed6.geometry} material={materials.SeaWeed} castShadow />
+          <mesh name="seaweed8" geometry={nodes.seaweed8.geometry} material={materials.SeaWeed} castShadow />
+          <mesh name="seaweed9" geometry={nodes.seaweed9.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="seaweed10" geometry={nodes.seaweed10.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Seaweed1" geometry={nodes.Seaweed1.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Seaweed2" geometry={nodes.Seaweed2.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Seaweed5" geometry={nodes.Seaweed5.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Seaweed7" geometry={nodes.Seaweed7.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Seaweed4" geometry={nodes.Seaweed4.geometry} material={materials.SeaWeed} castShadow/>
+          <mesh name="Stone3" geometry={nodes.Stone3.geometry} material={materials.Rock} castShadow/>
           <mesh
             name="Starfish2"
             geometry={nodes.Starfish2.geometry}
