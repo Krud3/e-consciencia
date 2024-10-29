@@ -9,11 +9,11 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import useAuthStore from "@/store/use-auth-store";
 import { useNavigate, Link } from "react-router-dom"; 
 import { auth } from "../../../firebase.config.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { createUser } from "@/DAO/userDao"; 
+import { createUser, getUser } from "@/DAO/userDao"; 
+import { toast } from "sonner"; 
 
 export function SignUpForm() {
 
@@ -27,15 +27,24 @@ export function SignUpForm() {
     const lastName = event.target["last-name"].value;
 
     try {
+      // Verificar si el usuario ya existe en la colección
+      const existingUser = await getUser(email);
+      if (existingUser) {
+        toast("User already exists!"); // Notificación de error si el usuario ya existe
+        return;
+      }
+
+      // Crear el usuario en Firebase Auth y Firestore
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
 
       await createUser(uid, { firstName, lastName, email });
 
-      console.log("User signed up and stored in Firestore!");
+      toast("✅ User created successfully!"); // Mensaje de éxito con emoji
       navigate('/econsciencia');
     } catch (error) {
       console.error("Error signing up:", error);
+      toast("❌ Error signing up. Please try again."); // Mensaje de error con emoji
     }
   };
 

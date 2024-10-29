@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import SignUpForm from './pages/(auth)/sign-up'
 import World from './pages/World'
-
+import { Toaster } from "@/components/ui/sonner"
+import BlockWorldMain from './pages/contamination/BlockWorldMain'
 
 const router = createBrowserRouter([
   {
@@ -20,10 +21,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/econsciencia", element: <World/>,
+  },
+  {
+    path: "/contamination", element: <BlockWorldMain/>,
   }
 ])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router ={router} />
+    <Toaster />cd 
   </StrictMode>,
 )

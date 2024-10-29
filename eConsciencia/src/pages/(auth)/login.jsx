@@ -8,21 +8,22 @@ import { auth, db } from "../../../firebase.config.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import LogoSolo from "@/assets/SVG/logo-solo.svg";
+import { toast } from "sonner"; 
 
 function AuthComponent() {
   const navigate = useNavigate();
-
   const loginGoogleWithPopup = useAuthStore((state) => state.loginGoogleWithPopup);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-
   const handleLoginWithGoogle = async () => {
     try {
       await loginGoogleWithPopup();
+      toast("✅ Logged in with Google!"); 
       navigate('/econsciencia');
     } catch (error) {
       console.error("Error during Google login:", error);
+      toast("❌ Error logging in with Google. Please try again.");
     }
   };
 
@@ -36,13 +37,16 @@ function AuthComponent() {
       const userSnapshot = await getDoc(userDoc);
 
       if (userSnapshot.exists()) {
+        toast("✅ Login successful!"); 
         console.log("User logged in and exists in Firestore:", userSnapshot.data());
         navigate('/econsciencia');
       } else {
         console.error("User does not exist in Firestore.");
+        toast("❌ User does not exist."); 
       }
     } catch (error) {
       console.error("Error during email login:", error);
+      toast("❌ Error logging in. Please check your email and password."); 
     }
   };
 
