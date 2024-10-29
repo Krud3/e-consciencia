@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import SignUpForm from './pages/(auth)/sign-up'
 import World from './pages/World'
+import Acidification from './pages/Acidification/Acidification';
 import { Toaster } from "@/components/ui/sonner"
 import BlockWorldMain from './pages/contamination/BlockWorldMain'
 
@@ -21,6 +22,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/econsciencia", element: <World/>,
+  },
+  {
+    path: "/acidification", element:<Acidification/>,
   },
   {
     path: "/contamination", element: <BlockWorldMain/>,
