@@ -2,7 +2,7 @@
 "use client"
 import React from "react";
 import "./Header.css";
-
+import {Link} from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import {
@@ -15,8 +15,8 @@ import {
     MenubarTrigger,
   } from "@/components/ui/menubar"
   
-  //import User from "../../assets/PNG/logo-solo.svg";
 import User from "/user.png"
+
 const Header = () => {
     return (
         <header className="header">
@@ -35,9 +35,13 @@ const Header = () => {
                         Escasez del agua 
                     </MenubarItem>
                     <MenubarItem>Contaminación del agua</MenubarItem>
-                    <MenubarItem>Acidificación del agua</MenubarItem>
+                    <MenubarItem>
+                        <Link to="/acidification">Acidificación del agua</Link>
+                    </MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem>Econsciencia</MenubarItem>
+                    <MenubarItem>
+                        <Link to="/econsciencia">Econsciencia</Link> 
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem>Log out</MenubarItem>
                     </MenubarContent>
