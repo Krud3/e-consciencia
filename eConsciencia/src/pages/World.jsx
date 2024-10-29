@@ -4,7 +4,7 @@ import React from "react";
 import "./World.css";
 import Figure from "./Figure";
 import Footer from "@/components/Footer/Footer";
-
+import Header from "@/components/Header/Header";
 const World = () => {
     const cameraSettings = {
       position: [2, 0, 5],
@@ -12,6 +12,7 @@ const World = () => {
     
     return (
         <React.Fragment>
+            <Header/>
                 <Canvas camera = {{
                     position: [6, 0, 10],
                 }}>
