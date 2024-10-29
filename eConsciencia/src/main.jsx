@@ -10,6 +10,7 @@ import World from './pages/World'
 import Acidification from './pages/Acidification/Acidification';
 import { Toaster } from "@/components/ui/sonner"
 import BlockWorldMain from './pages/contamination/BlockWorldMain'
+import Home from './pages/Home'
 
 
 const router = createBrowserRouter([
@@ -23,18 +24,19 @@ const router = createBrowserRouter([
     path: "/signin", element: <AuthComponent/>,
   },
   {
-    path: "/econsciencia", element: <World/>,
+    path: "/econsciencia", element: <Home/>,
   },
   {
     path: "/acidification", element:<Acidification/>,
   },
   {
     path: "/contamination", element: <BlockWorldMain/>,
-  }
+  },
+
 ])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router ={router} />
-    <Toaster />cd 
+    <Toaster /> 
   </StrictMode>,
 )
