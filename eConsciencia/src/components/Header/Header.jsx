@@ -32,6 +32,9 @@ const Header = () => {
                     <MenubarTrigger>Menu</MenubarTrigger>
                     <MenubarContent>
                     <MenubarItem>
+                        Inicio 
+                    </MenubarItem>
+                    <MenubarItem>
                         Escasez del agua 
                     </MenubarItem>
                     <MenubarItem>Contaminación del agua</MenubarItem>
@@ -43,7 +46,9 @@ const Header = () => {
                         <Link to="/econsciencia">Econsciencia</Link> 
                     </MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem>Log out</MenubarItem>
+                    <MenubarItem>
+                        <Link to="/signin">Log out</Link>
+                    </MenubarItem>
                     </MenubarContent>
                 </MenubarMenu>
             </Menubar>
