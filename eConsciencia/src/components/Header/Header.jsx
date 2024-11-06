@@ -37,7 +37,9 @@ const Header = () => {
                     <MenubarItem>
                         Escasez del agua 
                     </MenubarItem>
-                    <MenubarItem>Contaminación del agua</MenubarItem>
+                    <MenubarItem>
+                    <Link to="/contamination">Contaminación del agua</Link>
+                    </MenubarItem>
                     <MenubarItem>
                         <Link to="/acidification">Acidificación del agua</Link>
                     </MenubarItem>

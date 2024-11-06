@@ -7,11 +7,14 @@ import Lights from './lights/Lights';
 
 const BlockWorldMain = () => {
   return (
-    <Canvas  shadows>
-      <Lights />
-      <OrbitControls />
-      <BlockWorld />
-    </Canvas>
+    <>
+      <Canvas  shadows>
+        <Lights />
+        <OrbitControls />
+        <BlockWorld />
+      </Canvas>
+    </>
+
   );
 };
 
