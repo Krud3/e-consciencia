@@ -16,7 +16,7 @@ const Lights = () => {
       <directionalLight
         ref={dirLightRef}
         position={[50, 100, 50]} // Ajusta la posición según sea necesario
-        intensity={4}
+        intensity={3}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
@@ -26,6 +26,7 @@ const Lights = () => {
         shadow-camera-right={200}
         shadow-camera-top={200}
         shadow-camera-bottom={-200}
+        color={'#fae9ac'}
       />
     </>
   );
