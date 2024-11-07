@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer';
 import Introduction from '../components/Introduction';
 import CarouselSection from '../components/CarouselSection';
 import CO2 from "/CO2.png";
+import { Link } from "react-router-dom";
 import contaminacionAgua from "/contaminacionAgua.png";
 import {
   Card,
@@ -18,54 +19,48 @@ import {
 const Home = () => {
   return (
     <div className="h-screen overflow-y-auto"> 
-      <Header />
       <Introduction />
       <CarouselSection />
 
       {/* Contenedor de las tarjetas en una fila */}
-      <div className="flex flex-col md:flex-row justify-center gap-8 my-8 px-4">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6 my-4 px-4">
+        
         {/* Card para Contaminación del agua */}
-        <Card className="w-full md:w-1/2 lg:w-1/3 shadow-lg">
-          <CardHeader>
-            <CardTitle>Introducción</CardTitle>
-            <CardDescription>Contaminación del agua</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <img src={contaminacionAgua} alt="Contaminación del Agua" className="w-full h-48 object-cover" />
-          </CardContent>
-          <CardFooter>
-            <p>
-              La contaminación del agua es uno de los problemas ambientales más críticos de la actualidad. 
-              Aguas residuales, productos químicos industriales, plásticos y residuos agrícolas se vierten en 
-              ríos, lagos y océanos, afectando tanto a la vida acuática como a la salud humana. Estos contaminantes 
-              no solo alteran los ecosistemas, sino que también ponen en riesgo el suministro de agua potable 
-              para millones de personas.
-            </p>
-            <p>
-              Para combatir esta crisis, es crucial promover prácticas sostenibles y reducir la cantidad de 
-              contaminantes que entran en nuestros cuerpos de agua. Al entender las causas y efectos de la 
-              contaminación del agua, podemos tomar medidas para proteger y preservar este recurso vital.
-            </p>
-          </CardFooter>
-        </Card>
-
+        <Link to="/contamination" className="w-full md:w-1/2 lg:w-1/4">
+          <Card className="shadow-lg lg:max-w-sm p-4">
+            <CardHeader className="pb-2">
+              <CardTitle>Introduction</CardTitle>
+              <CardDescription>Water Contamination</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <img src={contaminacionAgua} alt="water contamination" className="w-full h-36 object-cover" />
+            </CardContent>
+            <CardFooter className="pt-2">
+              <p className="text-sm">
+              Water pollution is one of the most critical environmental problems facing the world today. Sewage, industrial chemicals, plastics, and agricultural waste are being dumped into rivers, lakes, and oceans. This not only affects aquatic life but also poses serious risks to human health. The contaminants disrupt ecosystems and threaten the supply of drinking water for millions of people. It's essential to address these issues to protect both the environment and public health. Visit our website to join us in raising awareness about this pressing concern.
+              </p>
+            </CardFooter>
+          </Card>
+        </Link>
+        
         {/* Card para Acidificación del agua */}
-        <Card className="w-full md:w-1/2 lg:w-1/3 shadow-lg">
-          <CardHeader>
-            <CardTitle>Introducción</CardTitle>
-            <CardDescription>Acidificación del agua</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <img src={CO2} alt="Acidificación del Agua" className="w-full h-48 object-cover" />
-          </CardContent>
-          <CardFooter>
-            <p>
-              Este fenómeno ocurre cuando el dióxido de carbono (CO₂) de la atmósfera se disuelve en el agua, 
-              disminuyendo su pH. Proviene de actividades humanas como la quema de combustibles fósiles (carros 
-              y fábricas) y la deforestación.
-            </p>
-          </CardFooter>
-        </Card>
+        <Link to="/acidification" className="w-full md:w-1/2 lg:w-1/4 ">
+          <Card className="shadow-lg lg:max-w-sm p-4">
+            <CardHeader className="pb-2">
+              <CardTitle>Introduction</CardTitle>
+              <CardDescription>Water Acidification</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <img src={CO2} alt="Water Acidification" className="w-full h-36 object-cover" />
+            </CardContent>
+            <CardFooter className="pt-2">
+              <p className="text-sm">
+              Water acidification occurs when carbon dioxide (CO₂) from the atmosphere dissolves into water bodies, leading to a decrease in pH levels. This process is primarily driven by human activities such as the burning of fossil fuels—like those used in cars and factories—and deforestation. Lower pH levels can have harmful effects on aquatic ecosystems, affecting the survival of various marine species. Understanding the causes and consequences of water acidification is crucial for developing strategies to mitigate its impact.
+              </p>
+            </CardFooter>
+          </Card>
+        </Link>
+
       </div>
 
       <Footer />
