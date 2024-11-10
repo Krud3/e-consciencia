@@ -7,7 +7,15 @@ body,
     width: 100%;
     height: 100%;
     background: #D3D3D3;
+    user-select:none;
 }
+/*  color: "#41a38a";
+font-size: "85pt";*/
+.title-sensitization {
+  color: "blueviolet";
+  font-size: "larger";
+}
+
 canvas {
     touch-action: none;
   }
@@ -73,3 +81,4 @@ canvas {
     height: auto; /* Mantiene la proporción de la imagen */
     margin-bottom: 0px; /* Opcional: espacio debajo de la imagen */
   }
+
