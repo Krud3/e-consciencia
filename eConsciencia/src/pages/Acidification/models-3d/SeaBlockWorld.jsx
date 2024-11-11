@@ -78,12 +78,14 @@ const SeaBlockWorld = (props) => {
   
           <mesh
             name="IslandMiddle"
+            onClick={(e)=> e.stopPropagation()}
             geometry={nodes.IslandMiddle.geometry}
             material={materials.IslandBottom}
             castShadow
           />
           <mesh
             name="IslandTop"
+            onClick={(e)=> e.stopPropagation()}
             geometry={nodes.IslandTop.geometry}
             material={materials.IslandMiddle}
             castShadow
@@ -97,8 +99,12 @@ const SeaBlockWorld = (props) => {
             onPointerOver={handlePointerOver}
             onPointerOut={handlePointerOut}
           />
-          <mesh name="Water" geometry={nodes.Water.geometry} material={materials.Water} castShadow/>
-          <group name="Sand" >
+          <mesh name="Water" 
+            geometry={nodes.Water.geometry} 
+            material={materials.Water} 
+            castShadow
+          />
+          <group name="Sand" onClick={(e)=> e.stopPropagation()} >
             <mesh name="Cube008" geometry={nodes.Cube008.geometry} material={materials.Sand} receiveShadow />
             <mesh
               name="Cube008_1"
@@ -107,8 +113,8 @@ const SeaBlockWorld = (props) => {
               receiveShadow
             />
           </group>
-          <mesh name="Stone0" geometry={nodes.Stone0.geometry} material={materials.Rock} castShadow/>
-          <group name="IslandBottom" castShadow>
+          <mesh name="Stone0" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone0.geometry} material={materials.Rock} castShadow/>
+          <group name="IslandBottom" onClick={(e)=> e.stopPropagation()} castShadow>
             <mesh
               name="Cube009"
               geometry={nodes.Cube009.geometry}
@@ -128,9 +134,9 @@ const SeaBlockWorld = (props) => {
               castShadow
             />
           </group>
-          <mesh name="CO21" geometry={nodes.CO21.geometry} material={materials.Smoke} castShadow/>
-          <mesh name="CO22" geometry={nodes.CO22.geometry} material={materials.Smoke} castShadow/>
-          <mesh name="Stone1" geometry={nodes.Stone1.geometry} material={materials.Rock} castShadow/>
+          <mesh name="CO21" onClick={(e)=> e.stopPropagation()} geometry={nodes.CO21.geometry} material={materials.Smoke} castShadow/>
+          <mesh name="CO22" onClick={(e)=> e.stopPropagation()} geometry={nodes.CO22.geometry} material={materials.Smoke} castShadow/>
+          <mesh name="Stone1" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone1.geometry} material={materials.Rock} castShadow/>
           <mesh 
             name="Starfish1"
             geometry={nodes.Starfish1.geometry} 
@@ -154,7 +160,7 @@ const SeaBlockWorld = (props) => {
             <mesh name="Fish00" geometry={nodes.Fish00.geometry} material={materials.Fish} />
           </group>
 
-          <mesh name="Stone2" geometry={nodes.Stone2.geometry} material={materials.Rock} castShadow/>
+          <mesh name="Stone2" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone2.geometry} material={materials.Rock} castShadow/>
           <group 
             name="SeaweedGroup"
             onClick={()=> handleObjectClick("SeaweedGroup")}// Calls with the name "SeaweedGroup"
@@ -176,7 +182,7 @@ const SeaBlockWorld = (props) => {
             <mesh name="Seaweed7" geometry={nodes.Seaweed7.geometry} material={materials.SeaWeed} castShadow/>
             <mesh name="Seaweed4" geometry={nodes.Seaweed4.geometry} material={materials.SeaWeed} castShadow/>
           </group>
-          <mesh name="Stone3" geometry={nodes.Stone3.geometry} material={materials.Rock} castShadow/>
+          <mesh name="Stone3" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone3.geometry} material={materials.Rock} castShadow/>
           <mesh
             name="Starfish2"
             geometry={nodes.Starfish2.geometry}
