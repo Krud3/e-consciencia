@@ -10,7 +10,7 @@ const Title = () => {
                 wrapperClass="title-sensitization"
                 center
                 distanceFactor={15}
-                position = {[-2, 12, 0]}
+                position = {[-2, 10, 0]}
                 style={{
                     color: "#41a38a",
                     fontSize: "80pt"
@@ -89,7 +89,7 @@ const Title = () => {
                 occlude
                 center
                 distanceFactor={15}
-                position = {[7, -2.5, -4]}
+                position = {[8, -2.5, -4]}
                 style={{
                     color: "violet",
                     fontSize: "20pt"

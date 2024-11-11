@@ -9,15 +9,15 @@ const SeaBlockWorld = (props) => {
     // Configuracion de posiciones de la camara segun el objeto
     const cameraPositions = {
       House: {x: 5, y: 8, z: 5},
-      SickStarfish: {x: 15, y: -3.7, z: 7},
-      HealthyStarfish: {x: 16, y: -2, z: -2},
+      SickStarfish: {x: 15, y: -5.5, z: 8},
+      HealthyStarfish: {x: 16, y: -3, z: -2},
       HealthyFishGroup : {x: 14, y: -5.3, z: 0},
       SickFishGroup: {x: 7, y: -2, z: 0},
-      SickCoralsGroup: {x: 10.2, y: -5.3, z: -3.2},
+      SickCoralsGroup: {x: 10.28, y: -5.1, z: -3.5},
       HealthyCoralsGroup:{x: 10.2, y: -5.1, z: -5.8},
-      HealthyCrab: {x: 9.5, y: -3, z: -1.2},
+      HealthyCrab: {x: 11, y: -3, z: -1.2},
       SickCrab: {x: -12, y: -2, z: -3.5},
-      SeaweedGroup: {x: 11.3, y: -4.8, z: 1.2}, 
+      SeaweedGroup: {x: 10.3, y: -4.8, z: 1.2}, 
     };
 
     // Funcion para manejar el click en los objetos
