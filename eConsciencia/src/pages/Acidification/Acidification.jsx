@@ -1,21 +1,25 @@
 //import Header from "../../components/Header/Header";
 import "./Acidification.css";
-import { Canvas } from "@react-three/fiber";
+import { Canvas} from "@react-three/fiber";
 import SeaBlockWorld from "./models-3d/SeaBlockWorld";
 import { OrbitControls } from "@react-three/drei";
 import Lights from "./lights/Lights";
+import Controls from "./controls/Controls";
 import Title from "./models-3d/Html3D";
-
+import { useState} from "react";
 
 const Acidification = () => {
+  const [cameraPosition, setCameraPosition]= useState({x:20, y:2, z:0});
+ 
   return (
     <>
-
         <Canvas shadows>
             <Title/>
             <Lights/>
-            <OrbitControls autorotate/>
-            <SeaBlockWorld/>
+            <Controls cameraPosition={cameraPosition}/>
+            <SeaBlockWorld
+              setCameraPosition={setCameraPosition}
+            />
         </Canvas>
         
     </>
