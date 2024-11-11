@@ -8,15 +8,16 @@ const SeaBlockWorld = (props) => {
 
     // Configuracion de posiciones de la camara segun el objeto
     const cameraPositions = {
-      House: {x: 1, y: 15, z: 10},
-      SickStarfish: {x: 6, y: 10, z: 15},
-      HealthyStarfish: {x: 6, y: 10, z: 15},
-      HealthyFishGroup : {x: 6, y: 10, z: 15},
-      SickFishGroup: {x: 6, y: 10, z: 15},
+      House: {x: 5, y: 8, z: 5},
+      SickStarfish: {x: 15, y: -3.7, z: 7},
+      HealthyStarfish: {x: 16, y: -2, z: -2},
+      HealthyFishGroup : {x: 14, y: -6, z: 0},
+      SickFishGroup: {x: 7, y: -2, z: 0},
+
       SickCoralsGroup: {x: 0, y: 5, z: 5},
       HealthyCoralsGroup: {x: 0, y: 5, z: 5},
-      HealthyCrab: {x: 0, y: 5, z: 5},
-      SickCrab: {x: 0, y: 5, z: 5},
+      HealthyCrab: {x: 12, y: -4, z: 1},
+      SickCrab: {x: 2, y: -4, z: -12},
       SeaweedGroup: {x: 0, y: 5, z: 5}, 
     };
 
