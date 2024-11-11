@@ -13,7 +13,7 @@ const Title = () => {
                 position = {[-2, 12, 0]}
                 style={{
                     color: "#41a38a",
-                    fontSize: "70pt"
+                    fontSize: "80pt"
                 }}
             >
                 <h1>
@@ -41,10 +41,10 @@ const Title = () => {
                 occlude
                 center
                 distanceFactor={15}
-                position = {[-4, 0, -7]}
+                position = {[-3.5, -3, -9]}
                 style={{
                     color: "indianred",
-                    fontSize: "20pt"
+                    fontSize: "25pt"
                 }}
             >
                 
@@ -54,10 +54,10 @@ const Title = () => {
 
             </Html>
             <Html
-                
+                occlude
                 center
                 distanceFactor={15}
-                position = {[9, -4, 6]}
+                position = {[7, -3, 9.5]}
                 style={{
                     color: "indianred",
                     fontSize: "20pt"
@@ -70,12 +70,12 @@ const Title = () => {
 
             </Html>
             <Html
-                
+                occlude
                 center
                 distanceFactor={15}
                 position = {[2, -2, 3]}
                 style={{
-                    color: "darkblue",
+                    color: "orange",
                     fontSize: "20pt"
                 }}
             >
@@ -86,12 +86,12 @@ const Title = () => {
 
             </Html>
             <Html
-                
+                occlude
                 center
                 distanceFactor={15}
                 position = {[7, -2.5, -4]}
                 style={{
-                    color: "orange",
+                    color: "violet",
                     fontSize: "20pt"
                 }}
             >
@@ -102,13 +102,13 @@ const Title = () => {
 
             </Html>
             <Html
-                
+                occlude
                 center
                 distanceFactor={15}
-                position = {[2.5, -4, 2]}
+                position = {[5, -4.5, 6]}
                 style={{
-                    color: "white",
-                    fontSize: "20pt"
+                    color: "green",
+                    fontSize: "25pt"
                 }}
             >
                 
