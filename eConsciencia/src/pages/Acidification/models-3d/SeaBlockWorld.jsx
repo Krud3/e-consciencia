@@ -11,14 +11,13 @@ const SeaBlockWorld = (props) => {
       House: {x: 5, y: 8, z: 5},
       SickStarfish: {x: 15, y: -3.7, z: 7},
       HealthyStarfish: {x: 16, y: -2, z: -2},
-      HealthyFishGroup : {x: 14, y: -6, z: 0},
+      HealthyFishGroup : {x: 14, y: -5.3, z: 0},
       SickFishGroup: {x: 7, y: -2, z: 0},
-
-      SickCoralsGroup: {x: 0, y: 5, z: 5},
-      HealthyCoralsGroup: {x: 0, y: 5, z: 5},
-      HealthyCrab: {x: 12, y: -4, z: 1},
-      SickCrab: {x: 2, y: -4, z: -12},
-      SeaweedGroup: {x: 0, y: 5, z: 5}, 
+      SickCoralsGroup: {x: 10.2, y: -5.3, z: -3.2},
+      HealthyCoralsGroup:{x: 10.2, y: -5.1, z: -5.8},
+      HealthyCrab: {x: 9.5, y: -3, z: -1.2},
+      SickCrab: {x: -12, y: -2, z: -3.5},
+      SeaweedGroup: {x: 11.3, y: -4.8, z: 1.2}, 
     };
 
     // Funcion para manejar el click en los objetos
