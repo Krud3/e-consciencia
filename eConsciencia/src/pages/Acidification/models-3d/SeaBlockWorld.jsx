@@ -20,7 +20,7 @@ const SeaBlockWorld = (props) => {
       SeaweedGroup: {x: 10.3, y: -4.8, z: 1.2}, 
     };
 
-    // Funcion para manejar el click en los objetos
+    // Functions that manage the click on the objects  
     const handleObjectClick = (objectName) => {
       
       const newPosition = cameraPositions[objectName];
@@ -29,12 +29,23 @@ const SeaBlockWorld = (props) => {
       }
     };
 
+   
+  const handlePointerOver = (event) => {
+    document.body.style.cursor = "pointer";  // Changes the pointer to "hand"
+  };
+
+  const handlePointerOut = (event) => {
+    document.body.style.cursor = "default";  // Restore the pointe to original
+  };
+
     return (
         <group {...props} dispose={null}>
         <group name="Scene">
           <group 
             name="SickCoralsGroup"
             onClick={()=> handleObjectClick("SickCoralsGroup")}// Calls with the name "SickCoralsGroup"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           >
             <mesh name="Coral00" geometry={nodes.Coral00.geometry} material={materials.Coral} />
             <mesh name="Coral01" geometry={nodes.Coral01.geometry} material={materials.Coral} />
@@ -50,6 +61,8 @@ const SeaBlockWorld = (props) => {
           <group 
             name="HealthyCoralsGroup"
             onClick={()=> handleObjectClick("HealthyCoralsGroup")}// Calls with the name "HealthyCoralsGroup"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           > 
             <mesh name="Coral10" geometry={nodes.Coral10.geometry} material={materials.CoralGreen} />
             <mesh name="Coral11" geometry={nodes.Coral11.geometry} material={materials.CoralGreen} />
@@ -81,6 +94,8 @@ const SeaBlockWorld = (props) => {
             material={materials.House} 
             castShadow 
             onClick={()=> handleObjectClick("House")}// Calls with the name "House"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           />
           <mesh name="Water" geometry={nodes.Water.geometry} material={materials.Water} castShadow/>
           <group name="Sand" >
@@ -121,9 +136,13 @@ const SeaBlockWorld = (props) => {
             geometry={nodes.Starfish1.geometry} 
             material={materials.Starfish} 
             onClick={()=> handleObjectClick("SickStarfish")} // Calls with the name "SickStarfish"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           />
           <group name="HealthyFishGroup"
            onClick={()=> handleObjectClick("HealthyFishGroup")}// Calls with the name "FishGroup1"
+           onPointerOver={handlePointerOver}
+           onPointerOut={handlePointerOut}
           >
             <mesh name="Fish01" geometry={nodes.Fish01.geometry} material={materials.Fish} />
             <mesh name="Fish02" geometry={nodes.Fish02.geometry} material={materials.Fish} />
@@ -139,6 +158,8 @@ const SeaBlockWorld = (props) => {
           <group 
             name="SeaweedGroup"
             onClick={()=> handleObjectClick("SeaweedGroup")}// Calls with the name "SeaweedGroup"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           >
             <mesh name="Seaweed0" geometry={nodes.Seaweed0.geometry} material={materials.SeaWeed} castShadow />
             <mesh name="Seaweed11" geometry={nodes.Seaweed11.geometry} material={materials.SeaWeed} castShadow/>
@@ -161,12 +182,16 @@ const SeaBlockWorld = (props) => {
             geometry={nodes.Starfish2.geometry}
             material={materials.RedStarfish}
             onClick={()=> handleObjectClick("HealthyStarfish")} // Calls with the name "HealthyStarfish"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           />
           <mesh 
             name="Crab01"
             geometry={nodes.Crab01.geometry} 
             material={materials.Crab}
             onClick={()=> handleObjectClick("HealthyCrab")} // Calls with the name "HealthyCrab"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           >
             <mesh name="Plane002" geometry={nodes.Plane002.geometry} material={materials.Crab} />
             <mesh name="Plane003" geometry={nodes.Plane003.geometry} material={materials.Crab} />
@@ -184,6 +209,8 @@ const SeaBlockWorld = (props) => {
             geometry={nodes.Crab02.geometry} 
             material={materials.Crab}
             onClick={()=> handleObjectClick("SickCrab")} // Calls with the name "SickCrab"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           >
             <mesh name="Plane013" geometry={nodes.Plane013.geometry} material={materials.Crab} />
             <mesh name="Plane014" geometry={nodes.Plane014.geometry} material={materials.Crab} />
@@ -199,6 +226,8 @@ const SeaBlockWorld = (props) => {
           <group 
             name="SickFishGroup"
             onClick={()=> handleObjectClick("SickFishGroup")} // Calls with the name "SickFishGroup"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
           >
             <mesh name="Fish08" geometry={nodes.Fish08.geometry} material={materials.ANotherFish} />
             <mesh name="Fish09" geometry={nodes.Fish09.geometry} material={materials.ANotherFish} />
