@@ -7,6 +7,7 @@ import Lights from "./lights/Lights";
 import Controls from "./controls/Controls";
 import Title from "./models-3d/Html3D";
 import { useState} from "react";
+import Staging from "./staging/Staging";
 
 const Acidification = () => {
   const [cameraPosition, setCameraPosition]= useState({x:20, y:2, z:0});
@@ -17,6 +18,7 @@ const Acidification = () => {
             <Title/>
             <Lights/>
             <Controls cameraPosition={cameraPosition}/>
+            <Staging/>
             <SeaBlockWorld
               setCameraPosition={setCameraPosition}
             />
