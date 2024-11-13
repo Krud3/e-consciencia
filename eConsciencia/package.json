@@ -24,6 +24,7 @@
     "econsciencia": "file:",
     "embla-carousel-react": "^8.3.1",
     "firebase": "^10.13.0",
+    "gsap": "^3.12.5",
     "latest": "^0.2.0",
     "lucide-react": "^0.436.0",
     "next-themes": "^0.3.0",

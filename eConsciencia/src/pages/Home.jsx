@@ -16,6 +16,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import World from './World';
+
 const Home = () => {
   return (
     <div className="h-screen overflow-y-auto"> 
@@ -24,6 +26,24 @@ const Home = () => {
 
       {/* Contenedor de las tarjetas en una fila */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 my-4 px-4">
+
+         {/* Card para escasez de agua */}
+         <Link to="/Shortage" className="w-full md:w-1/2 lg:w-1/4">
+          <Card className="shadow-lg lg:max-w-sm p-4">
+            <CardHeader className="pb-2">
+              <CardTitle>Introduction</CardTitle>
+              <CardDescription>Water Shortage</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <img src={"Freshwater-shortages.jpg"} alt="water contamination" className="w-full h-36 object-cover" />
+            </CardContent>
+            <CardFooter className="pt-2">
+              <p className="text-sm">
+              Water scarcity is one of the most urgent environmental challenges the world faces today. Millions of people worldwide lack access to clean and safe drinking water due to droughts, over-extraction, and contamination of water sources. This crisis not only impacts human health but also hampers agriculture, industry, and ecosystems. As the demand for water increases, it becomes critical to manage this precious resource wisely. It's vital that we address these issues to ensure a sustainable water future for all. Visit our website to help raise awareness and take action on this critical issue.
+              </p>
+            </CardFooter>
+          </Card>
+        </Link>
         
         {/* Card para Contaminación del agua */}
         <Link to="/contamination" className="w-full md:w-1/2 lg:w-1/4">

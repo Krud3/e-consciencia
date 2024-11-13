@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/Home";
 import Acidification from "@/pages/Acidification/Acidification";
 import BlockWorldMain from "@/pages/contamination/BlockWorldMain";
+import Shortage from "./pages/shortage/Shortage";
 import AuthComponent from "@/pages/(auth)/login";
 import SignUpForm from "@/pages/(auth)/sign-up";
 import Header from "@/components/Header/Header";
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/econsciencia" element={<Home />} />
           <Route path="/acidification" element={<Acidification />} />
           <Route path="/contamination" element={<BlockWorldMain />} />
+          <Route path="/shortage" element={<Shortage />} />
         </Route>
       </Routes>
     </Router>
