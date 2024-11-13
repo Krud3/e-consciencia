@@ -98,22 +98,22 @@ const Shortage = () => {
 
   const textos = [
     {
-      title: "La Crisis del Agua: Un Problema Global",
-      txt: "El agua es vital, pero su escasez es un problema creciente. El cambio climático, la sobrepoblación y la contaminación están afectando su disponibilidad. Es urgente tomar conciencia sobre su uso responsable para asegurar su acceso en el futuro.",
+      title: "The Water Crisis: A Global Problem",
+      txt: "Water is vital, but its scarcity is a growing problem. Climate change, overpopulation, and pollution are affecting its availability. It is urgent to raise awareness about responsible usage to ensure access in the future.",
     },
     {
-      title: "Cada Gota Cuenta",
-      txt: "Cada gota cuenta. Pequeños cambios, como cerrar el grifo al cepillarse o reducir el tiempo en la ducha, ayudan a ahorrar agua.",
+      title: "Every Drop Counts",
+      txt: "Every drop counts. Small changes, like turning off the tap while brushing your teeth or shortening your shower time, help save water.",
     },
     {
-      title: "El Agua Potable es Escasa",
-      txt: "El agua potable es escasa. Aunque el 70% de la Tierra está cubierta de agua, solo el 1% es accesible para consumo humano.",
+      title: "Drinking Water is Scarce",
+      txt: "Drinking water is scarce. Although 70% of the Earth is covered by water, only 1% is accessible for human consumption.",
     },
     {
-      title: "Acción Contra la Escasez de Agua",
-      txt: "La escasez de agua impacta a millones. Reducir el desperdicio y apoyar soluciones sostenibles es clave para enfrentar este reto global.",
+      title: "Taking Action Against Water Scarcity",
+      txt: "Water scarcity affects millions. Reducing waste and supporting sustainable solutions is key to tackling this global challenge.",
     },
-  ];
+];
 
   const positions = [
     [2, 6, 2],
