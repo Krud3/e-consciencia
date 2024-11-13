@@ -1,142 +1,232 @@
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
-import LightsShortage from './lights/LightsShortage'
+//import Header from "../../components/Header/Header";
+import { Canvas } from "@react-three/fiber";
+import { Model } from "./World";
+import { OrbitControls, Environment, Text, Text3D } from "@react-three/drei";
+import BlockWorld from "../contamination/BlockWorld";
+import LightsShortage from "./lights/LightsShortage";
+import React, { useState, useEffect, Suspense } from "react";
+import { useThree } from "@react-three/fiber";
+import { gsap } from "gsap";
+import { Sky, Stars } from "@react-three/drei";
 
-const ShortageBlock = (props) => {
-  const { nodes, materials } = useGLTF('/3d-models-shortage/worlBlock.gbl')
+function CameraAnimation({ viewIndex, positions, tarjets }) {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    gsap.to(camera.position, {
+      x: positions[viewIndex][0],
+      y: positions[viewIndex][1],
+      z: positions[viewIndex][2],
+      duration: 1,
+      ease: "power0",
+      onUpdate: () => camera.updateProjectionMatrix(),
+    });
+
+    const target = {
+      // Definir un objeto de target para la animación
+      x: camera.position.x,
+      y: camera.position.y,
+      z: camera.position.z,
+    };
+
+    gsap.to(target, {
+      x: tarjets[viewIndex][0],
+      y: tarjets[viewIndex][1],
+      z: tarjets[viewIndex][2],
+      duration: 1,
+      ease: "power0", // Mantener el mismo easing para la sincronización
+      onUpdate: () => {
+        camera.lookAt(target.x, target.y, target.z);
+      },
+    });
+  }, [viewIndex]);
+
   return (
-    <group {...props} dispose={null}>
-      <group position={[0.998, 11.187, -1.447]} rotation={[-Math.PI / 2, 0, 0]} scale={14.715}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-        <LightsShortage position={[0, 0, 20]} angle={20}/>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial.geometry}
-            material={materials.GROUND}
-            scale={1.178}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial002.geometry}
-            material={materials.ROCKS_BIG}
-            position={[0, -0.345, 0]}
-            scale={[1, 0.589, 1]}
-                />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial003.geometry}
-            material={materials.ROCKS_SMALL}
-            position={[0, -0.106, 0]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial008.geometry}
-            material={materials.WATER}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial018.geometry}
-            material={materials.THREE}
-            position={[0, -0.136, 0]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial014.geometry}
-            material={materials.GRASS}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial016.geometry}
-            material={materials.GRASS}
-            position={[0, -0.412, 0]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.defaultMaterial017.geometry}
-            material={materials.GRASS}
-          />
-        </group>
-      </group>
-      <group position={[0, 3.24, -4.511]} rotation={[Math.PI / 2, 0, 0]} scale={0.053}>
-        <group scale={100}>
-          <group rotation={[-Math.PI / 2, 0, 0]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_0.geometry}
-              material={nodes.Object_0.material}
-              position={[0, -0.361, -0.665]}
-              rotation={[-1.441, 0.154, -0.02]}
-            />
-          </group>
-        </group>
-      </group>
-      <group position={[6.527, 3.831, 5.973]} rotation={[Math.PI / 2, 0, 0]} scale={0.053}>
-        <group scale={100}>
-          <group rotation={[-Math.PI / 2, 0, 0]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_0001.geometry}
-              material={nodes.Object_0001.material}
-              position={[0, -0.506, 0]}
-              rotation={[1.602, 0, 0]}
-            />
-          </group>
-        </group>
-      </group>
-      <group position={[7.438, 3.831, -0.729]} rotation={[Math.PI / 2, 0, 0]} scale={0.03}>
-        <group scale={100}>
-          <group rotation={[-Math.PI / 2, 0, 0]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_0002.geometry}
-              material={nodes.Object_0002.material}
-              position={[0, -0.873, 0]}
-              rotation={[-1.243, 0, 0]}
-            />
-          </group>
-        </group>
-      </group>
-      <group position={[-1.314, 2.422, 4.18]} rotation={[Math.PI / 2, 0, 0]} scale={0.023}>
-        <group scale={100}>
-          <group rotation={[-Math.PI / 2, 0, 0]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_0003.geometry}
-              material={nodes.Object_0003.material}
-              position={[-0.353, -0.596, -2.679]}
-              rotation={[-1.623, 0.214, 0.011]}
-            />
-          </group>
-        </group>
-      </group>
-      <group position={[-5.834, 3.831, 5.973]} rotation={[Math.PI / 2, 0, 0.732]} scale={0.053}>
-        <group scale={100}>
-          <group rotation={[-Math.PI / 2, 0, 0]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Object_0004.geometry}
-              material={nodes.Object_0004.material}
-              position={[-0.014, -0.476, -0.27]}
-              rotation={[-1.518, 0.11, -0.953]}
-            />
-          </group>
-        </group>
-      </group>
-    </group>
-  )
+    <OrbitControls
+      target={[
+        tarjets[viewIndex][0],
+        tarjets[viewIndex][1],
+        tarjets[viewIndex][2],
+      ]}
+      enableZoom={false}
+      enablePan={false}
+      enableRotate={false}
+    />
+  );
 }
-export default ShortageBlock;
-useGLTF.preload('/3d-models-shortage/worlBlock.gbl')
+
+const Shortage = () => {
+  const [viewIndex, setViewIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [focusMode, setFocusMode] = useState(false);
+  const [showInfo, setShowInfo] = useState(false); // Nuevo estado para mostrar el mensaje
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (isAnimating) return;
+      setIsAnimating(true);
+
+      if (event.key === "ArrowRight") {
+        // Si se presiona la tecla derecha, aumentar el índice de vista
+        setViewIndex((prev) => (prev + 1) % 4);
+      } else if (event.key === "ArrowLeft") {
+        // Si se presiona la tecla izquierda, disminuir el índice de vista
+        setViewIndex((prev) => (prev - 1 + 4) % 4);
+      }
+
+      setTimeout(() => setIsAnimating(false), 1000);
+    };
+
+    console.log(viewIndex);
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isAnimating]);
+
+  useEffect(() => {
+    const handleClick = () => {
+      setFocusMode((prev) => !prev);
+    };
+
+    // Agregar el evento de clic
+    window.addEventListener("click", handleClick);
+
+    // Limpiar el evento al desmontar el componente
+    return () => window.removeEventListener("click", handleClick);
+  }, []);
+
+  const textos = [
+    {
+      title: "La Crisis del Agua: Un Problema Global",
+      txt: "El agua es vital, pero su escasez es un problema creciente. El cambio climático, la sobrepoblación y la contaminación están afectando su disponibilidad. Es urgente tomar conciencia sobre su uso responsable para asegurar su acceso en el futuro.",
+    },
+    {
+      title: "Cada Gota Cuenta",
+      txt: "Cada gota cuenta. Pequeños cambios, como cerrar el grifo al cepillarse o reducir el tiempo en la ducha, ayudan a ahorrar agua.",
+    },
+    {
+      title: "El Agua Potable es Escasa",
+      txt: "El agua potable es escasa. Aunque el 70% de la Tierra está cubierta de agua, solo el 1% es accesible para consumo humano.",
+    },
+    {
+      title: "Acción Contra la Escasez de Agua",
+      txt: "La escasez de agua impacta a millones. Reducir el desperdicio y apoyar soluciones sostenibles es clave para enfrentar este reto global.",
+    },
+  ];
+
+  const positions = [
+    [2, 6, 2],
+    [0, 5, 0],
+    [-2, 5, 3],
+    [-2, 5, -2],
+  ];
+
+  const focus = [
+    [10, 5, -12],
+    [10, 6, 11],
+    [-10, 6, 14],
+    [-15, 6, -3],
+  ];
+
+  return (
+    <>
+      {focusMode && (
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black bg-opacity-80 p-8 text-2xl text-white">
+          <p className="text-3xl text-center mb-4">
+            <strong>{textos[viewIndex].title}</strong>
+          </p>
+          <p className="text-3xl text-center">{textos[viewIndex].txt}</p>
+        </div>
+      )}
+      {/* Botón de información */}
+      <button
+        onClick={() => setShowInfo(!showInfo)} // Cambia el estado al hacer clic
+        className="absolute top-20 left-4 z-30 p-2 bg-blue-500 text-white rounded-full"
+      >
+        ?
+      </button>
+
+      {/* Mostrar el mensaje solo si showInfo es true */}
+      {showInfo && (
+        <div className="absolute top-32 left-4 z-30 p-4 bg-white text-black border rounded shadow-lg">
+          <p>¡Navega por el mundo y descubre más! 🌍</p>
+          <p>
+            Usa las flechas ⬅️ ➡️ para moverte y haz click👆 para leer el
+            mensaje completo.
+          </p>
+        </div>
+      )}
+      <Canvas className="bg-cyan-200" shadows={true}>
+        <Suspense fallback={null}>
+          <Sky
+            distance={4500} // Tamaño del cielo
+            sunPosition={[200, 20, 100]} // Posición del sol para sombras
+            inclination={0.6} // Ángulo del sol
+            azimuth={0.25} // Rotación del cielo
+          />
+          <Stars
+            radius={100} // Radio de las estrellas
+            depth={50} // Profundidad de las estrellas
+            count={5000} // Cantidad de estrellas
+            factor={4} // Tamaño de las estrellas
+            saturation={0} // Saturación para blanco puro
+            fade // Hace que las estrellas se desvanezcan con la distancia
+          />
+          <CameraAnimation
+            viewIndex={viewIndex}
+            positions={positions}
+            tarjets={focus}
+          />
+          <Model />
+          <LightsShortage />
+          <Text3D
+            position={[4.3, 5, -7.5]}
+            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
+            size={0.4}
+            color="blue"
+            rotation={[0, -Math.PI * 0.13, 0]}
+          >
+            shortage
+            <meshStandardMaterial color="blue" />
+          </Text3D>
+
+          <Text3D
+            position={[8, 5, 6]}
+            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
+            size={0.4}
+            color="white"
+            rotation={[0, -Math.PI * 0.75, 0]}
+          >
+            drop
+            <meshStandardMaterial color="blue" />
+          </Text3D>
+
+          <Text3D
+            position={[-5.5, 5, 12]}
+            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
+            size={0.4}
+            color="blue"
+            rotation={[0, Math.PI * 0.74, 0]}
+          >
+            Scanty
+            <meshStandardMaterial color="blue" />
+          </Text3D>
+
+          <Text3D
+            position={[-11.5, 5, -1]}
+            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
+            size={0.4}
+            color="white"
+            rotation={[0, Math.PI * 0.47, 0]}
+          >
+            impact
+            <meshStandardMaterial color="blue" />
+          </Text3D>
+        </Suspense>
+      </Canvas>
+    </>
+  );
+};
+
+export default Shortage;
