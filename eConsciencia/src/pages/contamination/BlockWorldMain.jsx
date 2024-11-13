@@ -5,11 +5,16 @@ import { OrbitControls, Environment } from '@react-three/drei';
 import BlockWorld from './BlockWorld';
 import Lights from './lights/Lights';
 import Controllers from './Controllers';
+import Bienvenida from './texts/Bienvenida';
+import Controls from './controls/Controls';
+
 
 const BlockWorldMain = () => {
+  
   return (
     <>
       <Canvas  shadows>
+        <Controls />
         <Lights />
         <OrbitControls />
         <Environment
@@ -18,6 +23,8 @@ const BlockWorldMain = () => {
         />
         <BlockWorld />
         <Controllers />
+        <Bienvenida />
+
       </Canvas>
 
     </>
