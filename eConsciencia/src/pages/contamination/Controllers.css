@@ -1,0 +1,22 @@
+.left-arrow,
+.right-arrow {
+    width: 100px;
+    height: 100px;
+    transition: 0.5s;
+    box-shadow: -2px 2px 0 0 rgba(0, 51, 0, 1);
+    cursor: pointer;
+}
+
+.left-arrow{
+    transform: rotate(45deg);
+}
+
+.right-arrow{
+    transform: rotate(225deg);
+}
+
+.left-arrow:hover,
+.right-arrow:hover {
+    box-shadow: -2px 2px 0 0 rgba(0, 51, 0, 0.5);
+}
+

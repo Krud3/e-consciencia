@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import BlockWorld from './BlockWorld';
 import Lights from './lights/Lights';
+import Controllers from './Controllers';
 
 const BlockWorldMain = () => {
   return (
@@ -16,7 +17,9 @@ const BlockWorldMain = () => {
           background
         />
         <BlockWorld />
+        <Controllers />
       </Canvas>
+
     </>
 
   );
