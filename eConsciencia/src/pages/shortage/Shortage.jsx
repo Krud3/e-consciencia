@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import LightsShortage from './lights/LightsShortage'
 
-export function ShortageBlock (props) {
+const ShortageBlock = (props) => {
   const { nodes, materials } = useGLTF('/3d-models-shortage/worlBlock.gbl')
   return (
     <group {...props} dispose={null}>
@@ -138,5 +138,5 @@ export function ShortageBlock (props) {
     </group>
   )
 }
-
+export default ShortageBlock;
 useGLTF.preload('/3d-models-shortage/worlBlock.gbl')
