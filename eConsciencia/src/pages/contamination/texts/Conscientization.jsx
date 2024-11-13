@@ -14,10 +14,10 @@ const Conscientization = ({height, title, text}) => {
             top: `${height -(height/2)-300}px`,
             }}    
         >
-        <h1 className="text-tittle">
-        {title}</h1>
-        <p className="text-info">
-        {text}</p>
+        <div key={`${title}-${text}`} className="fade-in">
+            <h1 className="text-tittle">{title}</h1>
+            <p className="text-info">{text}</p>
+        </div>
 
         </Html>
         </>

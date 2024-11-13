@@ -1,3 +1,16 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
 @font-face {
     font-family: "Funnel";
     src: url("FunnelDisplay-VariableFont_wght.ttf") format("truetype");

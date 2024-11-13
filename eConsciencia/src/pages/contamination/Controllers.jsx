@@ -68,6 +68,23 @@ const Controllers = () => {
       useEffect(() => {
         console.log("Current Index Updated:", currentIndex);
       }, [currentIndex]);
+
+      useEffect(() => {
+        const handleKeyDown = (event) => {
+          if (event.key === 'ArrowLeft') {
+            handlePrev();
+          } else if (event.key === 'ArrowRight') {
+            handleNext();
+          }
+        };
+    
+        window.addEventListener('keydown', handleKeyDown);
+    
+        // Cleanup function to remove the event listener
+        return () => {
+          window.removeEventListener('keydown', handleKeyDown);
+        };
+      }, [handlePrev, handleNext]);
     return (
         <>
             <Html
@@ -85,9 +102,9 @@ const Controllers = () => {
                 position: "relative",
                 left: `${canvasWidth -(canvasWidth/2)-200}px`,
                 }}
-                onClick={handleNext}
+                
             >
-                <div onClick={handlePrev} className = "right-arrow"></div>
+                <div onClick={handleNext} className = "right-arrow"></div>
             </Html>
             <Conscientization height={height} title={data[currentIndex].title} text={data[currentIndex].text}/>
         </>
