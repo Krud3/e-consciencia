@@ -20,7 +20,7 @@ const Header = () => {
           <img src='logo-solo.svg' alt='logo-eConsciencia' className="h-6 w-6" />
           <span className="sr-only">Home</span>
         </Link>
-        <Link to="#" className="text-foreground transition-colors hover:text-foreground whitespace-nowrap">
+        <Link to="/Shortage" className="text-foreground transition-colors hover:text-foreground whitespace-nowrap">
           Water Shortage
         </Link>
         <Link to="/contamination" className="text-muted-foreground transition-colors hover:text-foreground whitespace-nowrap">
