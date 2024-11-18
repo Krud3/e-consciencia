@@ -1,22 +1,26 @@
 // src/pages/contamination/BlockWorldMain.jsx
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { Environment } from '@react-three/drei';
 import BlockWorld from './BlockWorld';
 import Lights from './lights/Lights';
-import Controllers from './Controllers';
+import Controllers from './controls/Controllers';
 import Bienvenida from './texts/Bienvenida';
 import Controls from './controls/Controls';
 
 
 const BlockWorldMain = () => {
+
+  const cameraSettings = {
+    position : [0, 65, 0],
+  };
   
   return (
     <>
-      <Canvas  shadows>
+      <Canvas camera={cameraSettings} shadows>
         <Controls />
         <Lights />
-        <OrbitControls />
+        
         <Environment
           files="/hdris/kloofendal_48d_partly_cloudy_puresky_1k.hdr"
           background
