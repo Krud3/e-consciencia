@@ -1,22 +1,29 @@
+// Controls.jsx
 import { OrbitControls } from "@react-three/drei";
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
-const Controls = () => {
+const Controls = ({ cameraSettings, enabled = true }) => {
+  const controlsRef = useRef();
+
+  useEffect(() => {
+    if (controlsRef.current && cameraSettings.target) {
+      controlsRef.current.target = new THREE.Vector3(...cameraSettings.target);
+      controlsRef.current.update();
+    }
+  }, [cameraSettings]);
+
   return (
     <OrbitControls
-      // Sets the maximum horizontal rotation angle (azimuth) to 45 degrees to the right
+      ref={controlsRef}
+      enabled={enabled}
+      // Configuración de ángulos y habilitaciones
       maxAzimuthAngle={Math.PI * 0.05}
-      // Sets the minimum horizontal rotation angle (azimuth) to 45 degrees to the left
-      minAzimuthAngle={-Math.PI * 0.05}
-      // Sets the maximum vertical rotation angle (polar) to about 81 degrees from the top
+      minAzimuthAngle={-Math.PI * 0.10}
       maxPolarAngle={Math.PI * 0.45}
-      // Sets the minimum vertical rotation angle (polar) to about 45 degrees from the top
       minPolarAngle={Math.PI * 0.35}
-      // Disables zoom functionality (users cannot zoom in or out)
       enableZoom={false}
-      // Disables panning functionality (users cannot move the camera horizontally or vertically)
       enablePan={true}
-
-      // Enables damping (smooth transition) of the camera movement
       enableDamping={true}
     />
   );

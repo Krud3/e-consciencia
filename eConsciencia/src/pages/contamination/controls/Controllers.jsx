@@ -30,7 +30,7 @@ const Controllers = () => {
   return (
     <>
       {!isPlaying && (<Html center style={{ position: "relative",
-        bottom: `${canvasHeight - canvasHeight / 2 - 200}px`,
+        
        }}>
         <button onClick={setIsPlaying} className="is-playing-button" role="button">
           Start the journey
@@ -54,8 +54,8 @@ const Controllers = () => {
           left: `${canvasWidth - canvasWidth / 2 - 200}px`,
         }}
       >
-        <button class="arrow-container" role="button" onClick={handleNext}>
-          <div class="right-arrow"></div>
+        <button className="arrow-container" role="button" onClick={handleNext}>
+          <div className="right-arrow"></div>
         </button>
       </Html>)}
 

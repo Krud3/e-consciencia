@@ -10,7 +10,7 @@ const Conscientization = ({height, title, text}) => {
         <Html   
         center
         style={{
-            position: "relative",
+            position: "absolute",
             top: `${height -(height/2)-300}px`,
             }}    
         >
