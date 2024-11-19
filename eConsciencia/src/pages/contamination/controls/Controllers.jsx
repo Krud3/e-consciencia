@@ -39,24 +39,24 @@ const Controllers = () => {
 
       {isPlaying && (<Html
         style={{
-          position: "relative",
+          position: "absolute",
           right: `${canvasWidth - canvasWidth / 2 - 200}px`,
         }}
       >
-        <div className="arrow-container" onClick={handlePrev}>
+        <button className="arrow-container" role="button" onClick={handlePrev}>
           <div className="left-arrow"></div>
-        </div>
+        </button>
       </Html>)}
 
       {isPlaying && (<Html
         style={{
-          position: "relative",
+          position: "absolute",
           left: `${canvasWidth - canvasWidth / 2 - 200}px`,
         }}
       >
-        <div class="arrow-container" onClick={handleNext}>
+        <button class="arrow-container" role="button" onClick={handleNext}>
           <div class="right-arrow"></div>
-        </div>
+        </button>
       </Html>)}
 
       {isPlaying && (<Conscientization
@@ -66,7 +66,7 @@ const Controllers = () => {
       />)}
 
 
-      {isPlaying && (<Html center 
+      {isPlaying && (<Html  
       style={{ position: "relative",
         left: `${canvasWidth - canvasWidth / 2 - 200}px`,
         top: `${canvasHeight - canvasHeight / 2 - 200}px`,

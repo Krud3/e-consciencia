@@ -7,13 +7,18 @@ import Lights from './lights/Lights';
 import Controllers from './controls/Controllers';
 import Bienvenida from './texts/Bienvenida';
 import Controls from './controls/Controls';
+import useControlStore from '@/store/use-control-store';
 
 
 const BlockWorldMain = () => {
 
   const cameraSettings = {
     position : [0, 65, 0],
+    
+    
   };
+
+  const isPlaying = useControlStore((state) => state.isPlaying);
   
   return (
     <>
@@ -27,7 +32,7 @@ const BlockWorldMain = () => {
         />
         <BlockWorld />
         <Controllers />
-        <Bienvenida />
+        {!isPlaying && (<Bienvenida />)}
 
       </Canvas>
 

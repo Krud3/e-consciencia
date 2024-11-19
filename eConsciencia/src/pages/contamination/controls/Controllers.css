@@ -7,7 +7,7 @@
     border-radius: 50%; /* Hace que el contenedor sea un círculo */
     background-color: rgba(0, 128, 0, 0.2); /* Fondo con color */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+    
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra del círculo */
 }
 
