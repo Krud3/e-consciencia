@@ -16,8 +16,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import World from './World';
-
 const Home = () => {
   return (
     <div className="flex flex-col h-screen">
