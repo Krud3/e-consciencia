@@ -1,29 +1,38 @@
 // src/pages/contamination/BlockWorldMain.jsx
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { Environment } from '@react-three/drei';
 import BlockWorld from './BlockWorld';
 import Lights from './lights/Lights';
-import Controllers from './Controllers';
+import Controllers from './controls/Controllers';
 import Bienvenida from './texts/Bienvenida';
 import Controls from './controls/Controls';
+import useControlStore from '@/store/use-control-store';
 
 
 const BlockWorldMain = () => {
+
+  const cameraSettings = {
+    position : [0, 65, 0],
+    
+    
+  };
+
+  const isPlaying = useControlStore((state) => state.isPlaying);
   
   return (
     <>
-      <Canvas  shadows>
+      <Canvas camera={cameraSettings} shadows>
         <Controls />
         <Lights />
-        <OrbitControls />
+        
         <Environment
           files="/hdris/kloofendal_48d_partly_cloudy_puresky_1k.hdr"
           background
         />
         <BlockWorld />
         <Controllers />
-        <Bienvenida />
+        {!isPlaying && (<Bienvenida />)}
 
       </Canvas>
 

@@ -10,7 +10,7 @@ const Bienvenida = () => {
         anchorY={"bottom"}
         center
         font="/fonts/Mogra-Regular.ttf"
-        // fontSize={2}
+        fontSize={2}
         >
         {" "}
         Welcome to the World of Water Contamination!
@@ -18,7 +18,7 @@ const Bienvenida = () => {
         </Text>
         
         <Text
-        position={[1, 28, 0]}
+        position={[1, 27, 0]}
         color={"blue"}
         anchorX={"center"}
         anchorY={"bottom"}
@@ -26,7 +26,7 @@ const Bienvenida = () => {
         font="/fonts/Mogra-Regular.ttf"
         // fontSize={2}
         >
-        Embark on an interactive journey to understand the pressing issue of water contamination, its causes, and its profound effects on our planet.{" "}
+        Embark on an interactive journey to understand the pressing issue of water contamination, {"\n"}its causes, and its profound effects on our planet.
         </Text>
         </>
 

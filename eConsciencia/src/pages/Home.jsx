@@ -20,10 +20,10 @@ import World from './World';
 
 const Home = () => {
   return (
-    <div className="h-screen overflow-y-auto"> 
-      <Introduction />
-      <CarouselSection />
-
+    <div className="flex flex-col h-screen">
+      <main className="flex-grow overflow-y-auto"> 
+        <Introduction />
+        <CarouselSection />
       {/* Contenedor de las tarjetas en una fila */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 my-4 px-4">
 
@@ -80,8 +80,8 @@ const Home = () => {
             </CardFooter>
           </Card>
         </Link>
-
-      </div>
+        </div>
+      </main>
 
       <Footer />
     </div>
