@@ -1,3 +1,4 @@
+import { ZoomIn } from 'lucide-react';
 import { create } from 'zustand';
 
 const useControlStore = create((set) => ({
@@ -41,39 +42,71 @@ const useControlStore = create((set) => ({
       text: "Ecosystem Imbalance: Altered water chemistry affects plant growth and animal reproduction.\nLoss of Biodiversity: Sensitive species may become extinct, reducing ecosystem resilience."
     }
   ],
-
   dataCamera: [
     {
-      position: [0, 65, 0],
-      target: [0, 0, 0],
+      position: [0, 25, 0],
+      target: [0, 20, 20],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      //zoom: 0,
+      //zoom: adjustZoom(calculateDistance([0, 65, 0], [0, 20, 20])),
     },
     {
       position: [40, 10, 30],
       target: [-53.698, 0, 13.861],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
     },
     {
       position: [45, 15, 35],
       target: [36.455, 5.99, -54.691],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
     },
     {
       position: [50, 20, 40],
       target: [-27.777, -2.651, 49.918],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
     },
     {
       position: [55, 25, 50],
       target: [0, 65, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
     },
     {
       position: [60, 30, 65],
       target: [0, 65, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
     },
     {
       position: [65, 35, 70],
       target: [0, 65, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
     },
     {
       position: [70, 40, 80],
       target: [0, 65, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
     },
   ],
 
@@ -85,9 +118,14 @@ const useControlStore = create((set) => ({
     currentIndex: (state.currentIndex - 1 + state.data.length) % state.data.length
   })),
 
-  setIsPlaying: () => set((state) => ({
-    isPlaying: !state.isPlaying
-  })),
+  setIsPlaying: () => set((state) => {
+    const newIsPlaying = !state.isPlaying;
+    return {
+      isPlaying: newIsPlaying,
+      currentIndex: newIsPlaying ? state.currentIndex : 0,
+    };
+  }),
+
 }));
 
 export default useControlStore;

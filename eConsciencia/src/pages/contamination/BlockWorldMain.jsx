@@ -13,9 +13,22 @@ const BlockWorldMain = () => {
   const { isPlaying, dataCamera, currentIndex } = useControlStore();
   const cameraSettings = isPlaying ? dataCamera[currentIndex] : dataCamera[0];
 
+
+  useEffect(() => {
+    console.log('currentIndex', currentIndex);
+    console.log('cameraSettings', cameraSettings);
+  } , [currentIndex]);
+
   return (
     <>
-      <Canvas camera={{ position: cameraSettings.position }} shadows>
+      <Canvas  
+        camera={{
+          position: cameraSettings.position,
+          fov: cameraSettings.fov,
+          near: cameraSettings.near,
+          far: cameraSettings.far,
+          zoom: cameraSettings.zoom,
+        }}shadows>
         <Controls cameraSettings={cameraSettings} />
         <Lights />
         <Environment

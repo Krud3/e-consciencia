@@ -43,10 +43,10 @@ const Controllers = () => {
     const width = height * camera.aspect; // Ancho visible a la distancia `dist`
 
     // Posiciones en el espacio de la cámara
-    const leftArrowPosition = new THREE.Vector3(-width / 2 + 0.2, 0, -dist);
-    const rightArrowPosition = new THREE.Vector3(width / 2 - 0.2, 0, -dist);
-    const restartButtonPosition = new THREE.Vector3(0, -height / 2 + 0.2, -dist);
-    const conscientizationPosition = new THREE.Vector3(0, height /4, -dist); 
+    const leftArrowPosition = new THREE.Vector3(-width / 2 + 0.4, 0, -dist);
+    const rightArrowPosition = new THREE.Vector3(width / 2 - 0.4, 0, -dist);
+    const restartButtonPosition = new THREE.Vector3(0, -height / 2 + 0.4, -dist);
+    const conscientizationPosition = new THREE.Vector3(0, height /8, -dist); 
 
     // Transforma las posiciones al espacio mundial
     leftArrowPosition.applyMatrix4(camera.matrixWorld);
