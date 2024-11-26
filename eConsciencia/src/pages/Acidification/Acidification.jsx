@@ -10,7 +10,8 @@ import { useState} from "react";
 import Staging from "./staging/Staging";
 import Sensitization from "./Sensitization";
 import Footer from "@/components/Footer/Footer";
-
+import MultipleCO2Bottles from "./models-3d/CO2BottleGroup";
+import { Physics } from "@react-three/rapier";
 const Acidification = () => {
   const [cameraPosition, setCameraPosition]= useState({x:20, y:2, z:0});
  
@@ -22,9 +23,12 @@ const Acidification = () => {
             <Lights/>
             <Controls cameraPosition={cameraPosition}/>
             <Staging/>
-            <SeaBlockWorld
-              setCameraPosition={setCameraPosition}
-            />
+            <Physics>
+              <MultipleCO2Bottles/>
+              <SeaBlockWorld
+                setCameraPosition={setCameraPosition}
+              />
+            </Physics>
         </Canvas>
         <Sensitization/>
         <Footer/>

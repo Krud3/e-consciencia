@@ -1,9 +1,45 @@
 import {useGLTF, useTexture} from "@react-three/drei";
 //import { useMemo } from "react";
 //import { RepeatWrapping } from "three";
+import { RigidBody } from "@react-three/rapier";
+import React from "react";
+import { useState, useEffect } from "react";
+import {Color} from 'three';
+import { Text } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import Text3D from "./Text3D";
+import { useThree } from "@react-three/fiber";
 
 const SeaBlockWorld = (props) => {
     const {nodes, materials} = useGLTF("3d-models-acidification/sea-blockworld.glb");
+   
+    const [collisionMessage, setCollisionMessage] = useState("");
+    const [messagePosition, setMessagePosition] = useState([-2, 8, 0]); // Posición inicial del texto
+    const [hasCollided, setHasCollided] = useState(false); // Estado para controlar las colisiones
+    const { scene } = useThree();
+  
+    // Función que maneja la colisión
+    const handleCollision = ({other}) => {
+      if(other.rigidBodyObject){
+        if(other.rigidBodyObject.name === "bottle1" ||other.rigidBodyObject.name === "bottle2"){
+          if (!hasCollided){
+            //Actualizamos el estado para mostrar el mensaje
+            setCollisionMessage("corals contaminated with CO2");
+            setHasCollided(true);
+            //que el mensaje desaparezca
+            setTimeout(()=> {
+              setCollisionMessage("");
+            }, 2000);
+          }
+
+        }
+
+      }
+      //console.log(`${target.rigidBodyObject.name} colisionó con ${other.rigidBodyObject.name}`);
+ 
+    };
+
     //console.log(seaBlockWorldModel);
 
     // Configuracion de posiciones de la camara segun el objeto
@@ -39,42 +75,115 @@ const SeaBlockWorld = (props) => {
   };
 
     return (
+        <>
+        <Text3D message={collisionMessage} position={messagePosition} />
         <group {...props} dispose={null}>
+
         <group name="Scene">
-          <group 
-            name="SickCoralsGroup"
-            onClick={()=> handleObjectClick("SickCoralsGroup")}// Calls with the name "SickCoralsGroup"
-            onPointerOver={handlePointerOver}
-            onPointerOut={handlePointerOut}
+          <RigidBody 
+            name="rbSickCorals"
+            onCollisionEnter={handleCollision} // Llamar a la función de colisión
+            style= "fixed" 
+            colliders="hull"
           >
-            <mesh name="Coral00" geometry={nodes.Coral00.geometry} material={materials.Coral} />
-            <mesh name="Coral01" geometry={nodes.Coral01.geometry} material={materials.Coral} />
-            <mesh name="Coral02" geometry={nodes.Coral02.geometry} material={materials.Coral} />
-            <mesh name="Coral03" geometry={nodes.Coral03.geometry} material={materials.Coral} />
-            <mesh name="Coral04" geometry={nodes.Coral04.geometry} material={materials.Coral} />
-            <mesh name="Coral05" geometry={nodes.Coral05.geometry} material={materials.Coral} />
-            <mesh name="Coral06" geometry={nodes.Coral06.geometry} material={materials.Coral} />
-            <mesh name="Coral4" geometry={nodes.Coral4.geometry} material={materials.GreenCoral} />
-            <mesh name="Coral5" geometry={nodes.Coral5.geometry} material={materials.RedCoral} />
-            <mesh name="Coral6" geometry={nodes.Coral6.geometry} material={materials.YellowCoral} />
-          </group>
-          <group 
-            name="HealthyCoralsGroup"
-            onClick={()=> handleObjectClick("HealthyCoralsGroup")}// Calls with the name "HealthyCoralsGroup"
-            onPointerOver={handlePointerOver}
-            onPointerOut={handlePointerOut}
-          > 
-            <mesh name="Coral10" geometry={nodes.Coral10.geometry} material={materials.CoralGreen} />
-            <mesh name="Coral11" geometry={nodes.Coral11.geometry} material={materials.CoralGreen} />
-            <mesh name="Coral12" geometry={nodes.Coral12.geometry} material={materials.CoralGreen} />
-            <mesh name="Coral13" geometry={nodes.Coral13.geometry} material={materials.CoralGreen} />
-            <mesh name="Coral14" geometry={nodes.Coral14.geometry} material={materials.CoralGreen} />
-            <mesh name="Coral15" geometry={nodes.Coral15.geometry} material={materials.CoralGreen} />
-            <mesh name="Coral16" geometry={nodes.Coral16.geometry} material={materials.CoralGreen} />
-            <mesh name="Coral2" geometry={nodes.Coral2.geometry} material={materials.AnotherCoral} />
-            <mesh name="Coral7" geometry={nodes.Coral7.geometry} material={materials.BlueCoral} />
-            <mesh name="Coral3" geometry={nodes.Coral3.geometry} material={materials.OragneCoral} />
-          </group>
+            <group 
+              name="SickCoralsGroup"
+              onClick={(e)=> handleObjectClick("SickCoralsGroup")}// Calls with the name "SickCoralsGroup"
+              onPointerOver={handlePointerOver}
+              onPointerOut={handlePointerOut}
+            >
+              <mesh 
+                name="Coral00" 
+                geometry={nodes.Coral00.geometry} 
+                material={materials.Coral} 
+                // Aquí aplicamos el estado de color
+              />
+              <mesh name="Coral01" geometry={nodes.Coral01.geometry} material={materials.Coral} />
+              <mesh name="Coral02" geometry={nodes.Coral02.geometry} material={materials.Coral} />
+              <mesh name="Coral03" geometry={nodes.Coral03.geometry} material={materials.Coral} />
+              <mesh name="Coral04" geometry={nodes.Coral04.geometry} material={materials.Coral} />
+              <mesh name="Coral05" geometry={nodes.Coral05.geometry} material={materials.Coral} />
+              <mesh name="Coral06" geometry={nodes.Coral06.geometry} material={materials.Coral} />
+              <mesh name="Coral4" geometry={nodes.Coral4.geometry} material={materials.GreenCoral} />
+              <mesh name="Coral5" geometry={nodes.Coral5.geometry} material={materials.RedCoral} />
+              <mesh name="Coral6" geometry={nodes.Coral6.geometry} material={materials.YellowCoral} />
+            </group>
+          </RigidBody>
+          <RigidBody 
+            name="rbHealthyCorals" 
+            onCollisionEnter={handleCollision} // Llamar a la función de colisión
+            colliders="hull"
+          >
+            <group 
+              name="HealthyCoralsGroup"
+              onClick={()=> handleObjectClick("HealthyCoralsGroup")}// Calls with the name "HealthyCoralsGroup"
+              onPointerOver={handlePointerOver}
+              onPointerOut={handlePointerOut}
+            > 
+              <mesh 
+                name="Coral10" 
+                geometry={nodes.Coral10.geometry} 
+                material={materials.CoralGreen} 
+               
+              />
+              <mesh 
+                name="Coral11" 
+                geometry={nodes.Coral11.geometry} 
+                material={materials.CoralGreen} 
+               
+              />
+              <mesh 
+                name="Coral12" 
+                geometry={nodes.Coral12.geometry} 
+                material={materials.CoralGreen} 
+               
+              />
+              <mesh 
+                name="Coral13" 
+                geometry={nodes.Coral13.geometry} 
+                material={materials.CoralGreen} 
+               
+              />
+              <mesh 
+                name="Coral14" 
+                geometry={nodes.Coral14.geometry} 
+                material={materials.CoralGreen}
+                
+              />
+              <mesh 
+                name="Coral15" 
+                geometry={nodes.Coral15.geometry}
+                material={materials.CoralGreen} 
+                
+              />
+              <mesh 
+                name="Coral16" 
+                geometry={nodes.Coral16.geometry} 
+                material={materials.CoralGreen} 
+                
+              />
+              <mesh 
+                name="Coral2" 
+                geometry={nodes.Coral2.geometry} 
+                material={materials.AnotherCoral} 
+               
+              />
+              <mesh 
+                name="Coral7" 
+                geometry={nodes.Coral7.geometry}
+                material={materials.BlueCoral} 
+                
+              />
+              <mesh 
+                name="Coral3" 
+                geometry={nodes.Coral3.geometry} 
+                material={materials.OragneCoral}
+                
+              />
+            </group>
+
+          </RigidBody>
+
   
           <mesh
             name="IslandMiddle"
@@ -104,15 +213,19 @@ const SeaBlockWorld = (props) => {
             material={materials.Water} 
             castShadow
           />
-          <group name="Sand" onClick={(e)=> e.stopPropagation()} >
-            <mesh name="Cube008" geometry={nodes.Cube008.geometry} material={materials.Sand} receiveShadow />
-            <mesh
-              name="Cube008_1"
-              geometry={nodes.Cube008_1.geometry}
-              material={materials.BlackCave}
-              receiveShadow
-            />
-          </group>
+          
+          <RigidBody type="fixed">
+            <group name="Sand" onClick={(e)=> e.stopPropagation()} >
+              <mesh name="Cube008" geometry={nodes.Cube008.geometry} material={materials.Sand} receiveShadow />
+              <mesh
+                name="Cube008_1"
+                geometry={nodes.Cube008_1.geometry}
+                material={materials.BlackCave}
+                receiveShadow
+              />
+            </group>
+          </RigidBody>
+
           <mesh name="Stone0" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone0.geometry} material={materials.Rock} castShadow/>
           <group name="IslandBottom" onClick={(e)=> e.stopPropagation()} castShadow>
             <mesh
@@ -136,7 +249,10 @@ const SeaBlockWorld = (props) => {
           </group>
           <mesh name="CO21" onClick={(e)=> e.stopPropagation()} geometry={nodes.CO21.geometry} material={materials.Smoke} castShadow/>
           <mesh name="CO22" onClick={(e)=> e.stopPropagation()} geometry={nodes.CO22.geometry} material={materials.Smoke} castShadow/>
-          <mesh name="Stone1" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone1.geometry} material={materials.Rock} castShadow/>
+          <RigidBody  style= "fixed" colliders="hull">
+            <mesh name="Stone1" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone1.geometry} material={materials.Rock} castShadow/>
+          </RigidBody> 
+          
           <mesh 
             name="Starfish1"
             geometry={nodes.Starfish1.geometry} 
@@ -145,20 +261,22 @@ const SeaBlockWorld = (props) => {
             onPointerOver={handlePointerOver}
             onPointerOut={handlePointerOut}
           />
-          <group name="HealthyFishGroup"
-           onClick={()=> handleObjectClick("HealthyFishGroup")}// Calls with the name "FishGroup1"
-           onPointerOver={handlePointerOver}
-           onPointerOut={handlePointerOut}
-          >
-            <mesh name="Fish01" geometry={nodes.Fish01.geometry} material={materials.Fish} />
-            <mesh name="Fish02" geometry={nodes.Fish02.geometry} material={materials.Fish} />
-            <mesh name="Fish03" geometry={nodes.Fish03.geometry} material={materials.Fish} />
-            <mesh name="Fish04" geometry={nodes.Fish04.geometry} material={materials.Fish} />
-            <mesh name="Fish05" geometry={nodes.Fish05.geometry} material={materials.Fish} />
-            <mesh name="Fish06" geometry={nodes.Fish06.geometry} material={materials.Fish} />
-            <mesh name="Fish07" geometry={nodes.Fish07.geometry} material={materials.Fish} />
-            <mesh name="Fish00" geometry={nodes.Fish00.geometry} material={materials.Fish} />
-          </group>
+          <RigidBody type="kinematicPosition">
+            <group name="HealthyFishGroup"
+            onClick={()=> handleObjectClick("HealthyFishGroup")}// Calls with the name "FishGroup1"
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+            >
+              <mesh name="Fish01" geometry={nodes.Fish01.geometry} material={materials.Fish} />
+              <mesh name="Fish02" geometry={nodes.Fish02.geometry} material={materials.Fish} />
+              <mesh name="Fish03" geometry={nodes.Fish03.geometry} material={materials.Fish} />
+              <mesh name="Fish04" geometry={nodes.Fish04.geometry} material={materials.Fish} />
+              <mesh name="Fish05" geometry={nodes.Fish05.geometry} material={materials.Fish} />
+              <mesh name="Fish06" geometry={nodes.Fish06.geometry} material={materials.Fish} />
+              <mesh name="Fish07" geometry={nodes.Fish07.geometry} material={materials.Fish} />
+              <mesh name="Fish00" geometry={nodes.Fish00.geometry} material={materials.Fish} />
+            </group>
+          </RigidBody>
 
           <mesh name="Stone2" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone2.geometry} material={materials.Rock} castShadow/>
           <group 
@@ -183,14 +301,17 @@ const SeaBlockWorld = (props) => {
             <mesh name="Seaweed4" geometry={nodes.Seaweed4.geometry} material={materials.SeaWeed} castShadow/>
           </group>
           <mesh name="Stone3" onClick={(e)=> e.stopPropagation()} geometry={nodes.Stone3.geometry} material={materials.Rock} castShadow/>
-          <mesh
-            name="Starfish2"
-            geometry={nodes.Starfish2.geometry}
-            material={materials.RedStarfish}
-            onClick={()=> handleObjectClick("HealthyStarfish")} // Calls with the name "HealthyStarfish"
-            onPointerOver={handlePointerOver}
-            onPointerOut={handlePointerOut}
-          />
+          <RigidBody>
+            <mesh
+              name="Starfish2"
+              geometry={nodes.Starfish2.geometry}
+              material={materials.RedStarfish}
+              onClick={()=> handleObjectClick("HealthyStarfish")} // Calls with the name "HealthyStarfish"
+              onPointerOver={handlePointerOver}
+              onPointerOut={handlePointerOut}
+            />
+          </RigidBody>
+
           <mesh 
             name="Crab01"
             geometry={nodes.Crab01.geometry} 
@@ -229,22 +350,27 @@ const SeaBlockWorld = (props) => {
             <mesh name="Plane021" geometry={nodes.Plane021.geometry} material={materials.Crab} />
             <mesh name="Plane022" geometry={nodes.Plane022.geometry} material={materials.Crab} />
           </mesh>
-          <group 
-            name="SickFishGroup"
-            onClick={()=> handleObjectClick("SickFishGroup")} // Calls with the name "SickFishGroup"
-            onPointerOver={handlePointerOver}
-            onPointerOut={handlePointerOut}
-          >
-            <mesh name="Fish08" geometry={nodes.Fish08.geometry} material={materials.ANotherFish} />
-            <mesh name="Fish09" geometry={nodes.Fish09.geometry} material={materials.ANotherFish} />
-            <mesh name="Fish10" geometry={nodes.Fish10.geometry} material={materials.ANotherFish} />
-            <mesh name="Fish11" geometry={nodes.Fish11.geometry} material={materials.ANotherFish} />
-            <mesh name="Fish12" geometry={nodes.Fish12.geometry} material={materials.ANotherFish} />
-            <mesh name="Fish13" geometry={nodes.Fish13.geometry} material={materials.ANotherFish} />
-          </group>
+          <RigidBody type="kinematicPosition">
+            <group 
+              name="SickFishGroup"
+              onClick={()=> handleObjectClick("SickFishGroup")} // Calls with the name "SickFishGroup"
+              onPointerOver={handlePointerOver}
+              onPointerOut={handlePointerOut}
+            >
+              <mesh name="Fish08" geometry={nodes.Fish08.geometry} material={materials.ANotherFish} />
+              <mesh name="Fish09" geometry={nodes.Fish09.geometry} material={materials.ANotherFish} />
+              <mesh name="Fish10" geometry={nodes.Fish10.geometry} material={materials.ANotherFish} />
+              <mesh name="Fish11" geometry={nodes.Fish11.geometry} material={materials.ANotherFish} />
+              <mesh name="Fish12" geometry={nodes.Fish12.geometry} material={materials.ANotherFish} />
+              <mesh name="Fish13" geometry={nodes.Fish13.geometry} material={materials.ANotherFish} />
+            </group>
+
+          </RigidBody>
+
 
         </group>
       </group>
+    </>  
     );
 };
 

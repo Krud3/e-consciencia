@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import SeaBlockWorld from "./models-3d/SeaBlockWorld"
 import Lights from "./lights/Lights";
 import { OrbitControls } from '@react-three/drei';
-
+import { Physics } from "@react-three/rapier";
 
 const CarouselAcidification = () => {
   return (
@@ -17,7 +17,10 @@ const CarouselAcidification = () => {
                 enableRotate={false}
                 enableZoom={false}
             />
-            <SeaBlockWorld/>
+            <Physics>
+              <SeaBlockWorld/>
+            </Physics>
+            
         </Canvas>
         
     </>
