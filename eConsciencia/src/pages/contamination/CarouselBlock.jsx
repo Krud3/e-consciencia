@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import BlockWorld from './BlockWorld';
 import Lights from './lights/Lights';
 import { OrbitControls } from '@react-three/drei';
+import { Physics } from '@react-three/rapier';
 
 const CarouselBlock = () => {
   return (
@@ -12,7 +13,10 @@ const CarouselBlock = () => {
       style={{ pointerEvents: 'none' }}
     >
       <Lights />
-      <BlockWorld />
+      <Physics>
+        <BlockWorld />
+      </Physics>
+      
       <OrbitControls
         autoRotate
         enablePan={false}
