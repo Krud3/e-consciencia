@@ -1,13 +1,18 @@
 //import Header from "../../components/Header/Header";
 import { Canvas } from "@react-three/fiber";
-import { Model } from "./World";
-import { OrbitControls, Environment, Text, Text3D } from "@react-three/drei";
-import BlockWorld from "../contamination/BlockWorld";
+import { OrbitControls, Text3D } from "@react-three/drei";
 import LightsShortage from "./lights/LightsShortage";
 import React, { useState, useEffect, Suspense } from "react";
 import { useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { Sky, Stars } from "@react-three/drei";
+
+
+//utils
+import { concienciaAguaText, concienciaAguaitems, solucionesAguaText, solutionAguaItems } from "@/utils/textos";
+
+//modelos
+import { Scene } from "./scene";
 
 function CameraAnimation({ viewIndex, positions, tarjets }) {
   const { camera } = useThree();
@@ -48,9 +53,11 @@ function CameraAnimation({ viewIndex, positions, tarjets }) {
         tarjets[viewIndex][1],
         tarjets[viewIndex][2],
       ]}
-      enableZoom={false}
+      enableZoom={true}
       enablePan={false}
       enableRotate={false}
+      minDistance={8} // Distancia mínima del zoom
+       maxDistance={20} // Distancia máxima del zoom
     />
   );
 }
@@ -60,6 +67,9 @@ const Shortage = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [focusMode, setFocusMode] = useState(false);
   const [showInfo, setShowInfo] = useState(false); // Nuevo estado para mostrar el mensaje
+
+  
+  const [isDamaged, setIsDamaged] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -76,11 +86,7 @@ const Shortage = () => {
 
       setTimeout(() => setIsAnimating(false), 1000);
     };
-
-    console.log(viewIndex);
-
     window.addEventListener("keydown", handleKeyDown);
-
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAnimating]);
 
@@ -88,32 +94,10 @@ const Shortage = () => {
     const handleClick = () => {
       setFocusMode((prev) => !prev);
     };
-
-    // Agregar el evento de clic
     window.addEventListener("click", handleClick);
-
-    // Limpiar el evento al desmontar el componente
     return () => window.removeEventListener("click", handleClick);
   }, []);
-
-  const textos = [
-    {
-      title: "The Water Crisis: A Global Problem",
-      txt: "Water is vital, but its scarcity is a growing problem. Climate change, overpopulation, and pollution are affecting its availability. It is urgent to raise awareness about responsible usage to ensure access in the future.",
-    },
-    {
-      title: "Every Drop Counts",
-      txt: "Every drop counts. Small changes, like turning off the tap while brushing your teeth or shortening your shower time, help save water.",
-    },
-    {
-      title: "Drinking Water is Scarce",
-      txt: "Drinking water is scarce. Although 70% of the Earth is covered by water, only 1% is accessible for human consumption.",
-    },
-    {
-      title: "Taking Action Against Water Scarcity",
-      txt: "Water scarcity affects millions. Reducing waste and supporting sustainable solutions is key to tackling this global challenge.",
-    },
-];
+  
 
   const positions = [
     [2, 6, 2],
@@ -129,25 +113,26 @@ const Shortage = () => {
     [-15, 6, -3],
   ];
 
+   // Define el contenido según si está "dañado" o  solutionAguaItems
+   const currentText = isDamaged ? concienciaAguaText : solucionesAguaText;
+   const currentItems = isDamaged ? concienciaAguaitems : solutionAguaItems;
+
   return (
     <>
       {focusMode && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black bg-opacity-80 p-8 text-2xl text-white">
           <p className="text-3xl text-center mb-4">
-            <strong>{textos[viewIndex].title}</strong>
+            <strong>{currentText[viewIndex].title}</strong>
           </p>
-          <p className="text-3xl text-center">{textos[viewIndex].txt}</p>
+          <p className="text-3xl text-center">{currentText[viewIndex].txt}</p>
         </div>
       )}
-      {/* Botón de información */}
       <button
-        onClick={() => setShowInfo(!showInfo)} // Cambia el estado al hacer clic
+        onClick={() => setShowInfo(!showInfo)}
         className="absolute top-20 left-4 z-30 p-2 bg-blue-500 text-white rounded-full"
       >
         ?
       </button>
-
-      {/* Mostrar el mensaje solo si showInfo es true */}
       {showInfo && (
         <div className="absolute top-32 left-4 z-30 p-4 bg-white text-black border rounded shadow-lg">
           <p>¡Navega por el mundo y descubre más! 🌍</p>
@@ -160,69 +145,45 @@ const Shortage = () => {
       <Canvas className="bg-cyan-200" shadows={true}>
         <Suspense fallback={null}>
           <Sky
-            distance={4500} // Tamaño del cielo
-            sunPosition={[200, 20, 100]} // Posición del sol para sombras
-            inclination={0.6} // Ángulo del sol
-            azimuth={0.25} // Rotación del cielo
+            distance={4500}
+            sunPosition={[200, 20, 100]}
+            inclination={0.6}
+            azimuth={0.25}
           />
           <Stars
-            radius={100} // Radio de las estrellas
-            depth={50} // Profundidad de las estrellas
-            count={5000} // Cantidad de estrellas
-            factor={4} // Tamaño de las estrellas
-            saturation={0} // Saturación para blanco puro
-            fade // Hace que las estrellas se desvanezcan con la distancia
+            radius={100}
+            depth={50}
+            count={5000}
+            factor={4}
+            saturation={0}
+            fade
           />
           <CameraAnimation
             viewIndex={viewIndex}
             positions={positions}
             tarjets={focus}
           />
-          <Model />
+
           <LightsShortage />
-          <Text3D
-            position={[4.3, 5, -7.5]}
-            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
-            size={0.4}
-            color="blue"
-            rotation={[0, -Math.PI * 0.13, 0]}
-          >
-            shortage
-            <meshStandardMaterial color="blue" />
-          </Text3D>
 
-          <Text3D
-            position={[8, 5, 6]}
-            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
-            size={0.4}
-            color="white"
-            rotation={[0, -Math.PI * 0.75, 0]}
-          >
-            drop
-            <meshStandardMaterial color="blue" />
-          </Text3D>
+          <Scene isDamaged={isDamaged} setIsDamaged={setIsDamaged}/>
+          
 
-          <Text3D
-            position={[-5.5, 5, 12]}
-            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
-            size={0.4}
-            color="blue"
-            rotation={[0, Math.PI * 0.74, 0]}
-          >
-            Scanty
-            <meshStandardMaterial color="blue" />
-          </Text3D>
+          
 
-          <Text3D
-            position={[-11.5, 5, -1]}
-            font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
-            size={0.4}
-            color="white"
-            rotation={[0, Math.PI * 0.47, 0]}
-          >
-            impact
-            <meshStandardMaterial color="blue" />
-          </Text3D>
+          {currentItems.map((item, index) => (
+            <Text3D
+              key={index}
+              position={item.position}
+              font="https://threejs.org/examples/fonts/helvetiker_regular.typeface.json"
+              size={0.4}
+              color={item.color}
+              rotation={item.rotation}
+            >
+              {item.text}
+              <meshStandardMaterial color={item.color} />
+            </Text3D>
+          ))}
         </Suspense>
       </Canvas>
     </>
