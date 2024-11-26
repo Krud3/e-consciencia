@@ -48,7 +48,7 @@ const LightsShortage = () => {
       <directionalLight
         ref={dirLightRef}
         position={[50, 100, 50]} // Ajusta la posición según sea necesario
-        intensity={0.7}
+        intensity={5.7}
         castShadow
         shadow-mapSize-width={5048}
         shadow-mapSize-height={5048}
@@ -75,7 +75,7 @@ const LightsShortage = () => {
         position={[-2, 9, 6]}
         intensity={1800}
         angle={0.6}
-        color={"blue"}
+        color={"cyan"}
         castShadow
         penumbra={0.1}
         distance={20}
