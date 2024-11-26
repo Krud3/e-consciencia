@@ -37,7 +37,7 @@ const BlockWorldMain = () => {
           files="/hdris/kloofendal_48d_partly_cloudy_puresky_1k.hdr"
           background
         />
-        <Physics debug>
+        <Physics >
           <BlockWorld />
           <Shark  position={[0.305, -2.899, 54.539]}/>
         </Physics>
