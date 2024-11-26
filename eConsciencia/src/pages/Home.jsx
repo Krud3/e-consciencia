@@ -29,8 +29,8 @@ const Home = () => {
          <Link to="/Shortage" className="w-full md:w-1/2 lg:w-1/4">
           <Card className="shadow-lg lg:max-w-sm p-4">
             <CardHeader className="pb-2">
-              <CardTitle>Introduction</CardTitle>
-              <CardDescription>Water Shortage</CardDescription>
+              <CardTitle>Water Shortage</CardTitle>
+              <CardDescription>Introduction</CardDescription>
             </CardHeader>
             <CardContent>
               <img src={"Freshwater-shortages.jpg"} alt="water contamination" className="w-full h-36 object-cover" />
@@ -47,8 +47,8 @@ const Home = () => {
         <Link to="/contamination" className="w-full md:w-1/2 lg:w-1/4">
           <Card className="shadow-lg lg:max-w-sm p-4">
             <CardHeader className="pb-2">
-              <CardTitle>Introduction</CardTitle>
-              <CardDescription>Water Contamination</CardDescription>
+              <CardTitle>Water Contamination</CardTitle>
+              <CardDescription>Introduction</CardDescription>
             </CardHeader>
             <CardContent>
               <img src={contaminacionAgua} alt="water contamination" className="w-full h-36 object-cover" />
@@ -65,8 +65,8 @@ const Home = () => {
         <Link to="/acidification" className="w-full md:w-1/2 lg:w-1/4 ">
           <Card className="shadow-lg lg:max-w-sm p-4">
             <CardHeader className="pb-2">
-              <CardTitle>Introduction</CardTitle>
-              <CardDescription>Water Acidification</CardDescription>
+              <CardTitle>Water Acidification</CardTitle>
+              <CardDescription>Introduction</CardDescription>
             </CardHeader>
             <CardContent>
               <img src={CO2} alt="Water Acidification" className="w-full h-36 object-cover" />

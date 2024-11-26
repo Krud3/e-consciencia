@@ -1,8 +1,18 @@
 import { Html } from "@react-three/drei";
+import {useState} from "react";
 
 import "../Acidification.css";
 
 const Title = () => {
+    const [visibleContent, setVisibleContent] = useState({});
+
+    // Función para alternar la visibilidad de contenido específico
+    const toggleContent = (key) => {
+        setVisibleContent((prev) => ({
+            ...prev,
+            [key]: !prev[key],
+        }));
+    };
     return(
         <>
             <Html
@@ -32,10 +42,12 @@ const Title = () => {
                 }}
             >
                 
-                <button>
-                    causes
-                </button>
-
+                <button onClick={() => toggleContent("causes")}>causes</button>
+                {visibleContent["causes"] && (
+                    <div style={{ color: "black", fontSize: "12pt", marginTop: "12px" }}>
+                        Ocean acidification is primarily caused by excessive CO2 absorption.
+                    </div>
+                )}
             </Html>
             <Html
                 occlude
@@ -48,10 +60,14 @@ const Title = () => {
                 }}
             >
                 
-                <button>
+                <button onClick={() => toggleContent("crabs")}>
                     consequences on crabs 
                 </button>
-
+                {visibleContent["crabs"] && (
+                    <div style={{ color: "indianred", fontSize: "12pt", marginTop: "10px" }}>
+                        Crabs struggle to build strong shells due to reduced calcium carbonate.
+                    </div>
+                )}
             </Html>
             <Html
                 occlude
@@ -64,9 +80,14 @@ const Title = () => {
                 }}
             >
                 
-                <button>
+                <button onClick={() => toggleContent("starfish")}>
                     consequences on starfish    
                 </button>
+                {visibleContent["starfish"] && (
+                    <div style={{ color: "indianred", fontSize: "12pt", marginTop: "10px" }}>
+                        Starfish reproduction rates decrease under acidic conditions.
+                    </div>
+                )}
 
             </Html>
             <Html
@@ -80,9 +101,14 @@ const Title = () => {
                 }}
             >
                 
-                <button>
+                <button onClick={() => toggleContent("fish")}>
                     consequences on fish    
                 </button>
+                {visibleContent["fish"] && (
+                    <div style={{ color: "orange", fontSize: "12pt", marginTop: "10px" }}>
+                        Fish experience altered behavior and survival rates.
+                    </div>
+                )}
 
             </Html>
             <Html
@@ -96,9 +122,14 @@ const Title = () => {
                 }}
             >
                 
-                <button>
+                <button onClick={() => toggleContent("corals")}>
                     consequences on corals    
                 </button>
+                {visibleContent["corals"] && (
+                    <div style={{ color: "violet", fontSize: "12pt", marginTop: "10px" }}>
+                        Coral reefs face bleaching and structural breakdown.
+                    </div>
+                )}
 
             </Html>
             <Html
@@ -112,9 +143,14 @@ const Title = () => {
                 }}
             >
                 
-                <button>
+                <button onClick={() => toggleContent("solutions")}>
                     solutions   
                 </button>
+                {visibleContent["solutions"] && (
+                    <div style={{ color: "green", fontSize: "12pt", marginTop: "10px" }}>
+                        Reducing CO2 emissions is key to tackling ocean acidification.
+                    </div>
+                )}
 
             </Html>
             
