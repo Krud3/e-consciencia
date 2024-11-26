@@ -31,7 +31,7 @@ const SeaBlockWorld = (props) => {
             //que el mensaje desaparezca
             setTimeout(()=> {
               setCollisionMessage("");
-            }, 2000);
+            }, 5000);
           }
 
         }
