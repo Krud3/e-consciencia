@@ -50,9 +50,9 @@ const Controllers = () => {
   useFrame(() => {
     // Calcula el FOV vertical en radianes
     const vFOV = THREE.MathUtils.degToRad(camera.fov);
-    const dist = 1; // Distancia frente a la cámara donde colocar los controles
-    const height = 2 * Math.tan(vFOV / 2) * dist; // Altura visible a la distancia `dist`
-    const width = height * camera.aspect; // Ancho visible a la distancia `dist`
+    const dist = 1; 
+    const height = 2 * Math.tan(vFOV / 2) * dist;
+    const width = height * camera.aspect; 
 
     // Posiciones en el espacio de la cámara
     const leftArrowPosition = new THREE.Vector3(-width / 2 + 0.4, 0, -dist);
@@ -60,13 +60,11 @@ const Controllers = () => {
     const restartButtonPosition = new THREE.Vector3(0, -height / 2 + 0.4, -dist);
     const conscientizationPosition = new THREE.Vector3(0, height / 3, -dist);
 
-    // Transforma las posiciones al espacio mundial
     leftArrowPosition.applyMatrix4(camera.matrixWorld);
     rightArrowPosition.applyMatrix4(camera.matrixWorld);
     restartButtonPosition.applyMatrix4(camera.matrixWorld);
     conscientizationPosition.applyMatrix4(camera.matrixWorld);
 
-    // Actualiza el estado con las nuevas posiciones
     setPositions({
       leftArrow: leftArrowPosition,
       rightArrow: rightArrowPosition,
@@ -131,7 +129,7 @@ const Controllers = () => {
                 <Conscientization
                   title={data[currentIndex].title}
                   text={data[currentIndex].text}
-                  color={colore} // Aplica el color aquí
+                  color={colore} 
                 />
               </div>
             )}
