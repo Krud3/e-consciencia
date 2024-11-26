@@ -11,7 +11,7 @@ import useControlStore from '@/store/use-control-store';
 
 const BlockWorldMain = () => {
   const { isPlaying, dataCamera, currentIndex } = useControlStore();
-  const cameraSettings = isPlaying ? dataCamera[currentIndex] : dataCamera[0];
+  const cameraSettings = isPlaying ? dataCamera[currentIndex+1] : dataCamera[0];
 
 
   useEffect(() => {
