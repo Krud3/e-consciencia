@@ -40,7 +40,29 @@ const useControlStore = create((set) => ({
     {
       title: "On Ecosystems",
       text: "Ecosystem Imbalance: Altered water chemistry affects plant growth and animal reproduction.\nLoss of Biodiversity: Sensitive species may become extinct, reducing ecosystem resilience."
-    }
+    },
+    {
+      title: "Learn about solutions",
+      text: ""
+    },
+
+
+    {
+      title: "Industrial Regulations",
+      text: "Enforcing strict regulations on industrial discharges to limit the release of toxic substances into the environment."
+    },
+    {
+      title: "Waste Management",
+      text: "Proper disposal and recycling of waste to prevent pollutants from entering waterways."
+    },
+    {
+      title: "Water Treatment",
+      text: "Installing water treatment plants to purify contaminated water, making it safe for human consumption and the environment."
+    },
+    {
+      title: "Community Education",
+      text: "Raising public awareness about the importance of water conservation and how to reduce pollution at the individual level."
+    },
   ],
   dataCamera: [
     {
@@ -103,6 +125,50 @@ const useControlStore = create((set) => ({
     {
       position: [-57.698, 10, 13.861],
       target: [-53.698, 15, 13.861],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+    {
+      position: [1, 10, 2],
+      target: [0.7, 7, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+
+
+    {
+      position: [38, 7.99, -44.691],
+      target: [36.455, 5.99, -54.691],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+    {
+      position: [42.671, 3, 22.151],
+      target: [42.671, 0.32, 22.151],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+
+    {
+      position: [0, 65, 0],
+      target: [0, 0, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+
+    {
+      position: [40.455, 4, 17.445],
+      target: [40.455, 1, 17.445],
       fov: 75,
       near: 0.1,
       far: 1000,

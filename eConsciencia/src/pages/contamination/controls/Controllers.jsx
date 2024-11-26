@@ -1,16 +1,28 @@
-// Controllers.jsx
 import { Html } from "@react-three/drei";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useEffect, useState } from "react";
 import Conscientization from "../texts/Conscientization";
+import Solution from "../texts/Solution";
 import useControlStore from "../../../store/use-control-store";
 import * as THREE from "three";
 import "./Controllers.css";
 
 const Controllers = () => {
-  const { camera, size } = useThree();
+  const { camera } = useThree();
+  const {
+    currentIndex,
+    data,
+    handleNext,
+    handlePrev,
+    isPlaying,
+    setIsPlaying,
+  } = useControlStore();
 
-  const { currentIndex, data, handleNext, handlePrev, isPlaying, setIsPlaying } = useControlStore();
+  // Calcula 'isOnSolution' basado en 'currentIndex'
+  const isOnSolution = currentIndex >= 7;
+
+  // Define 'colore' basado en 'isOnSolution'
+  const colore = isOnSolution ? "green" : "blue";
 
   // Estado para almacenar las posiciones calculadas
   const [positions, setPositions] = useState({
@@ -46,7 +58,7 @@ const Controllers = () => {
     const leftArrowPosition = new THREE.Vector3(-width / 2 + 0.4, 0, -dist);
     const rightArrowPosition = new THREE.Vector3(width / 2 - 0.4, 0, -dist);
     const restartButtonPosition = new THREE.Vector3(0, -height / 2 + 0.4, -dist);
-    const conscientizationPosition = new THREE.Vector3(0, height /8, -dist); 
+    const conscientizationPosition = new THREE.Vector3(0, height / 3, -dist);
 
     // Transforma las posiciones al espacio mundial
     leftArrowPosition.applyMatrix4(camera.matrixWorld);
@@ -76,40 +88,57 @@ const Controllers = () => {
       {isPlaying && (
         <>
           <Html
+            center
             position={positions.leftArrow.toArray()}
             style={{ pointerEvents: "none" }}
           >
-            <div style={{ pointerEvents: "auto" }}>
-              <button className="arrow-container" role="button" onClick={handlePrev}>
-                <div className="left-arrow"></div>
-              </button>
-            </div>
+            {currentIndex !== 7 && (
+              <div style={{ pointerEvents: "auto" }}>
+                <button className="arrow-container" role="button" onClick={handlePrev}>
+                  <div className="left-arrow"></div>
+                </button>
+              </div>
+            )}
           </Html>
 
           <Html
+            center
             position={positions.rightArrow.toArray()}
             style={{ pointerEvents: "none" }}
           >
-            <div style={{ pointerEvents: "auto" }}>
-              <button className="arrow-container" role="button" onClick={handleNext}>
-                <div className="right-arrow"></div>
-              </button>
-            </div>
-          </Html>
-          <Html
-          center
-            position={positions.conscientization.toArray()}
-            style={{ pointerEvents: "none" }}
-          >
-            <div style={{ pointerEvents: "auto", textAlign: "center", maxWidth: "80vw" }}>
-              <Conscientization
-                title={data[currentIndex].title}
-                text={data[currentIndex].text}
-              />
-            </div>
+            {currentIndex !== 7 && (
+              <div style={{ pointerEvents: "auto" }}>
+                <button className="arrow-container" role="button" onClick={handleNext}>
+                  <div className="right-arrow"></div>
+                </button>
+              </div>
+            )}
           </Html>
 
           <Html
+            center
+            position={positions.conscientization.toArray()}
+            style={{ pointerEvents: "none" }}
+          >
+            {currentIndex !== 7 && (
+              <div
+                style={{
+                  pointerEvents: "auto",
+                  textAlign: "center",
+                  maxWidth: "80vw",
+                }}
+              >
+                <Conscientization
+                  title={data[currentIndex].title}
+                  text={data[currentIndex].text}
+                  color={colore} // Aplica el color aquí
+                />
+              </div>
+            )}
+          </Html>
+
+          <Html
+            center
             position={positions.restartButton.toArray()}
             style={{ pointerEvents: "none" }}
           >
@@ -119,6 +148,10 @@ const Controllers = () => {
               </button>
             </div>
           </Html>
+
+          {currentIndex === 7 && data[currentIndex]?.title && (
+            <Solution onClick={handleNext} tittle={data[currentIndex].title} />
+          )}
         </>
       )}
     </>

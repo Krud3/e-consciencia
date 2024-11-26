@@ -904,7 +904,7 @@ const BlockWorld = (props) => {
           name="barrel_old"
           geometry={nodes.barrel_old.geometry}
           material={materials['atlas_LPUP.023']}
-          position={[41.832, -3.109, 50.468]}
+          position={[54.055, 0, 13.11]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.01}
         />
