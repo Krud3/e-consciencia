@@ -10,6 +10,7 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import Text3D from "./Text3D";
 import { useThree } from "@react-three/fiber";
+import Crab from "./Crab";
 
 const SeaBlockWorld = (props) => {
     const {nodes, materials} = useGLTF("3d-models-acidification/sea-blockworld.glb");
@@ -80,6 +81,9 @@ const SeaBlockWorld = (props) => {
         <group {...props} dispose={null}>
 
         <group name="Scene">
+          
+          <Crab position = {[9, 0.2, 2]} scale={[2, 2, 2]}/>
+          
           <RigidBody 
             name="rbSickCorals"
             onCollisionEnter={handleCollision} // Llamar a la función de colisión
