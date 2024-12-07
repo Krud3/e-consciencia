@@ -12,6 +12,8 @@ import Sensitization from "./Sensitization";
 import Footer from "@/components/Footer/Footer";
 import MultipleCO2Bottles from "./models-3d/CO2BottleGroup";
 import { Physics } from "@react-three/rapier";
+import Video from "./videos/Video";
+
 const Acidification = () => {
   const [cameraPosition, setCameraPosition]= useState({x:20, y:2, z:0});
  
@@ -29,6 +31,12 @@ const Acidification = () => {
                 setCameraPosition={setCameraPosition}
               />
             </Physics>
+            <Video 
+              name="screen" 
+              position-y={0}
+              position-x={-5}
+              position-z={0} 
+              scale={10}/>
         </Canvas>
         <Sensitization/>
         <Footer/>
