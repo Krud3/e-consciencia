@@ -30,6 +30,9 @@ const Header = () => {
         <Link to="/acidification" className="text-muted-foreground transition-colors hover:text-foreground whitespace-nowrap">
           Water Acidification
         </Link>
+        <Link to="/quiz" className="text-muted-foreground hover:text-foreground">
+            Quiz section
+        </Link>
       </nav>
 
       {/* Sheet para el menú móvil (hamburguesa) */}
@@ -55,6 +58,9 @@ const Header = () => {
 
             <Link to="/acidification" className="text-muted-foreground hover:text-foreground">
             Water Acidification
+            </Link>
+            <Link to="/quiz" className="text-muted-foreground hover:text-foreground">
+            Quiz section
             </Link>
           </nav>
         </SheetContent>

@@ -6,6 +6,7 @@ import Shortage from "./pages/shortage/Shortage";
 import AuthComponent from "@/pages/(auth)/login";
 import SignUpForm from "@/pages/(auth)/sign-up";
 import Header from "@/components/Header/Header";
+import QuizMain from "@/pages/Quiz/QuizMain";
 import { Outlet } from "react-router-dom";
 
 const LayoutWithHeader = () => (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/acidification" element={<Acidification />} />
           <Route path="/contamination" element={<BlockWorldMain />} />
           <Route path="/shortage" element={<Shortage />} />
+          <Route path="/quiz" element={<QuizMain />}/>
         </Route>
       </Routes>
     </Router>

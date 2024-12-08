@@ -30,6 +30,7 @@ const BlockWorldMain = () => {
           near: cameraSettings.near,
           far: cameraSettings.far,
           zoom: cameraSettings.zoom,
+          rotation: cameraSettings.rotation,
         }}shadows>
         <Controls cameraSettings={cameraSettings} />
         <Lights />
