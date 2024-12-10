@@ -23,7 +23,7 @@ const Acidification = () => {
 
   const handleAudio = useCallback(()=>{
     audioRef.current.play();
-    audioRef.current.setVolume(1);
+    audioRef.current.setVolume(7);
   }, []);
   return (
     <>
@@ -41,10 +41,10 @@ const Acidification = () => {
             </Physics>
             <Video 
               name="screen" 
-              position-y={0}
-              position-x={-5}
+              position-y={-3}
+              position-x={-4}
               position-z={0} 
-              scale={10}/>
+              scale={6.5}/>
               <group position={[0, 5, 0]}>
                 <PositionalAudio ref={audioRef} loop url="./sounds/ocean_waves.mp3" distance={2}/>
               </group>
