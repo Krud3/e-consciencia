@@ -4,6 +4,7 @@ import { create } from 'zustand';
 const useControlStore = create((set) => ({
   currentIndex: 0,
   isPlaying: false,
+  indexQuiz: 0,
   data: [
     {
       title: "What is Water Contamination?",
@@ -71,6 +72,7 @@ const useControlStore = create((set) => ({
       fov: 75,
       near: 0.1,
       far: 1000,
+      //rotation: [Math.PI / 4, 0, 0],
       //zoom: 0,
       //zoom: adjustZoom(calculateDistance([0, 65, 0], [0, 20, 20])),
     },
@@ -176,12 +178,91 @@ const useControlStore = create((set) => ({
     },
   ],
 
+  quizDataCamera: [
+
+    //START
+    {
+      position: [0, 25, 0],
+      target: [0, 20, 20],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      rotation: [Math.PI / 4, 0, 0],
+      //zoom: 0,
+      //zoom: adjustZoom(calculateDistance([0, 65, 0], [0, 20, 20])),
+    },
+
+    //SHORTAGE
+    {// primera escena pregunta 1
+      position: [0, 0, 5],
+      target: [-9.46, 0.59, -16.94],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+      rotation: [0, Math.PI / 2, 0]
+    },
+    {// primera escena pregunta 2
+      position: [0, 10, 5],
+      target: [-9.46, 0.59, -16.94],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+      rotation: [0, Math.PI / 2, 0]
+        },
+
+    //CONTAMINATION
+    {//segunda escena pregunta 1
+      position: [0, -20, 5],
+      target: [0, 0, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+    {//segunda escena pregunta 2
+      position: [0, 0, -10],
+      target: [9, 0, -10],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+    //ACIDIFICATION
+    {//tercera escena pregunta 1
+      position: [0, 0, 10],
+      target: [0, -7, 0],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+    {//tercera escena pregunta 2
+      position: [0, 0, -10],
+      target: [9, 0, -10],
+      fov: 75,
+      near: 0.1,
+      far: 1000,
+      zoom: 1,
+    },
+    
+  ],
+
   handleNext: () => set((state) => ({
     currentIndex: (state.currentIndex + 1) % state.data.length
   })),
 
+  handleNexQuiz: () => set((state) => ({
+    indexQuiz: (state.indexQuiz + 1) % state.quizDataCamera.length
+  })),
+
   handlePrev: () => set((state) => ({
-    currentIndex: (state.currentIndex - 1 + state.data.length) % state.data.length
+    currentIndex: (state.currentIndex - 1 + state.data.length) % state.data.length,
+  })),
+
+  handlePrevQuiz: () => set((state) => ({
+    indexQuiz: (state.indexQuiz - 1 + state.quizDataCamera.length) % state.quizDataCamera.length
   })),
 
   setIsPlaying: () => set((state) => {
