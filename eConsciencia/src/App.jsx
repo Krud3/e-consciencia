@@ -8,6 +8,8 @@ import SignUpForm from "@/pages/(auth)/sign-up";
 import Header from "@/components/Header/Header";
 import QuizMain from "@/pages/Quiz/QuizMain";
 import { Outlet } from "react-router-dom";
+import useAuthStore from '@/store/use-auth-store';
+import { useEffect } from "react";
 
 const LayoutWithHeader = () => (
   <>
@@ -17,6 +19,12 @@ const LayoutWithHeader = () => (
 );
 
 const App = () => {
+  const observeAuthState = useAuthStore((state) => state.observeAuthState);
+
+  useEffect(() => {
+    observeAuthState();
+  }, [observeAuthState]);
+
   return (
     <Router>
       <Routes>

@@ -85,8 +85,6 @@ const BlockWorldMain = () => {
           <Physics >
             <BlockWorld />
             <Shark position={[0.305, -2.899, 54.539]} />
-
-
             <SeaGull 
               key={1}
               orbitCenter={[-48, 11.955, 5.757]}
@@ -99,25 +97,25 @@ const BlockWorldMain = () => {
               radius={15} 
               angleOffset={(Math.PI )} // distribuido en el círculo
             />
-                      <SeaGull3 
+            <SeaGull3 
               key={3}
               orbitCenter={[-48, 11.955, 5.757]}
               radius={17} 
               angleOffset={(Math.PI/2 +3)} // distribuido en el círculo
             />
-                      <SeaGull4 
+            <SeaGull4 
               key={4}
               orbitCenter={[-48, 11.955, 5.757]}
               radius={16} 
               angleOffset={(Math.PI/2 +4)} // distribuido en el círculo
             />
-                      <SeaGull5 
+            <SeaGull5 
               key={5}
               orbitCenter={[-48, 11.955, 5.757]}
               radius={14} 
               angleOffset={(Math.PI/2 +1)} // distribuido en el círculo
             />
-                      <SeaGull6 
+            <SeaGull6 
               key={6}
               orbitCenter={[-48, 11.955, 5.757]}
               radius={13} 

@@ -1,6 +1,7 @@
 import { auth } from '../../firebase.config.js';
 import { create } from 'zustand';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import useCoinsStore from './use-coin-store.js';
 
 const provider = new GoogleAuthProvider();
 
@@ -28,11 +29,13 @@ const useAuthStore = create((set) => ({
     },
     observeAuthState: () => {
         set({loading: true});
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 set({user, loading: false});
+                await useCoinsStore.getState().fetchCoinsForUser(user.uid);
             } else {
                 set({user: null, loading: false});
+                useCoinsStore.setState({ coins: 0, loadingCoins: true });
             }
         });
     }

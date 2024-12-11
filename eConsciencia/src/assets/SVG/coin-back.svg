@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 994.06 993.89">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1d1d1b;
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 880.56px;
+      }
+
+      .cls-2 {
+        fill: #fabb60;
+        stroke: #1d1d1b;
+        stroke-miterlimit: 10;
+        stroke-width: 34px;
+      }
+    </style>
+  </defs>
+  <circle class="cls-2" cx="497.03" cy="497.22" r="479.23"/>
+  <text class="cls-1" transform="translate(277.16 767.39)"><tspan x="0" y="0">$</tspan></text>
+</svg>

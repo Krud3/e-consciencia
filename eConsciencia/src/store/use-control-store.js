@@ -253,6 +253,38 @@ const useControlStore = create((set) => ({
     
   ],
 
+  dataQuiz: [
+    {
+      title: "Welcome to the quiz section",
+      text: "In this section you will be asked questions about the topics you have learned. Good luck!"
+    },
+    {
+      title: "Water Shortage",
+      text: "Please select the figures representing water shortage."
+    },
+    {
+      title: "Water Shortage",
+      text: "Tip: Water shortage occurs when the demand for water exceeds the available supply. It could kill animals like fish"
+    },
+    {
+      title: "Water Contamination",
+      text: "Please delete clicking the elements that contaminates the water."
+    },
+    {
+      title: "Water Contamination",
+      text: "Which solution is efective to prevent water contamination? Tip: Clikc on the correct trash container."
+    },
+    {
+      title: "Water Acidification",
+      text: "Select the corals that are affected by water acidification."
+    },
+    {
+      title: "Water Acidification",
+      text: "Click on the correct solution to prevent water acidification."
+    }
+  ],
+
+
   handleNext: () => set((state) => ({
     currentIndex: (state.currentIndex + 1) % state.data.length
   })),

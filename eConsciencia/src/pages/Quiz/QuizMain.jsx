@@ -1,22 +1,29 @@
-// src/pages/contamination/BlockWorldMain.jsx
-import React, {useEffect} from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import React, { useEffect } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
-import Lights from '@/pages/contamination/lights/Lights'
+import Lights from '@/pages/contamination/lights/Lights';
 import Controls from '@/pages/contamination/controls/Controls';
 import useControlStore from '@/store/use-control-store';
 import QuizBlockWorld from '@/pages/Quiz/QuizBlockWorld';
-
+import DialogContext from '@/components/DialogContext';
 
 const QuizMain = () => {
-  const { quizDataCamera, indexQuiz, handleNexQuiz, handlePrevQuiz } = useControlStore();
+  const { 
+    quizDataCamera, 
+    indexQuiz, 
+    handleNexQuiz, 
+    handlePrevQuiz, 
+    dataQuiz 
+  } = useControlStore();
+
   const cameraSettings = quizDataCamera[indexQuiz];
 
+  const { title, text } = dataQuiz[indexQuiz];
 
   useEffect(() => {
     console.log('currentIndex', indexQuiz);
     console.log('cameraSettings', cameraSettings);
-  } , [indexQuiz]);
+  }, [indexQuiz]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -32,8 +39,16 @@ const QuizMain = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handlePrevQuiz, handleNexQuiz]);
+
   return (
     <>
+      <DialogContext
+        title={title}
+        text={text}
+        onCancel={() => console.log('Cancel pressed')}
+        onValidate={() => console.log('Validate pressed')}
+      />
+      
       <Canvas  
         camera={{
           position: cameraSettings.position,
@@ -41,7 +56,9 @@ const QuizMain = () => {
           near: cameraSettings.near,
           far: cameraSettings.far,
           zoom: cameraSettings.zoom,
-        }}shadows>
+        }} 
+        shadows
+      >
         <Controls cameraSettings={cameraSettings} />
         <Lights />
         <Environment
@@ -49,7 +66,6 @@ const QuizMain = () => {
           background
         />  
         <QuizBlockWorld />      
-
       </Canvas>
     </>
   );

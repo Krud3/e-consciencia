@@ -11,8 +11,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import front from '@/assets/SVG/coin-front.svg';
+import back from '@/assets/SVG/coin-back.svg';
+
+import useAuthStore from '@/store/use-auth-store';
+import useCoinsStore from '@/store/use-coin-store';
 
 const Header = () => {
+  const { user, logout } = useAuthStore();
+  const { coins, incrementCoins } = useCoinsStore();
+
   return (
     <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -68,6 +76,21 @@ const Header = () => {
 
       <div className="ml-auto flex-1 sm:flex-initial">
         <div className="ml-auto flex-1 sm:flex-initial flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          {user && ( // Solo muestra las monedas si hay un usuario logueado
+            <div className="flex items-center gap-2">
+              <div className="coin-container">
+                <img src={front} alt="Coin front" className="coin-front" />
+                <img src={back} alt="Coin back" className="coin-back" />
+              </div>
+              <span className="font-medium text-base">{coins}</span>
+            </div>
+          )}
+          <div>
+            
+               <Button onClick={() => incrementCoins(user.uid)}>
+                try me
+              </Button>
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -81,7 +104,11 @@ const Header = () => {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Languages</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link to ="/signin" onClick={() => logout()} className="text-muted-foreground hover:text-foreground">
+                Logout
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           
