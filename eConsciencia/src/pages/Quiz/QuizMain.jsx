@@ -151,9 +151,7 @@ const QuizMain = () => {
         text={text}
         onCancel={() => console.log('Cancel pressed')}
         onValidate={() => console.log('Validate pressed')}
-      />
-      
-      <Canvas  
+      /> 
       <Canvas 
         camera={{
           position: cameraSettings.position,
