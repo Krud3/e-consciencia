@@ -27,7 +27,7 @@ const QuizMain = () => {
     SickCorals: false,
     HealthyCorals: false,
     Factory: false,
-    Tree: true,
+    Tree: false,
   });
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const QuizMain = () => {
     const cameraPosition = quizDataCamera[indexQuiz].position;
     console.log(cameraPosition);
     // Determina visibilidad según la posición de la cámara
-    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === -9) {
+    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === -7) {
       // ACIDIFICACION: Activa los objetos
       setVisibilityMap({
        Factory: true,
@@ -167,16 +167,19 @@ const QuizMain = () => {
           visible={visibilityMap.SickCorals}
           />
         </Physics>
-        <HealthyCorals>
-        visible={visibilityMap.HealthyCorals}
-        </HealthyCorals>
-        <Factory>
-        visible={visibilityMap.Factory}
-        </Factory>
-        <Tree>
-        visible={visibilityMap.Tree}
-        </Tree>
+        <HealthyCorals
+          visible={visibilityMap.HealthyCorals}
+        />
         
+        <Factory
+        visible={visibilityMap.Factory}
+        />
+          
+        <Tree
+        visible={visibilityMap.Tree}
+        />
+          
+    
       </Canvas>
       
     </>
