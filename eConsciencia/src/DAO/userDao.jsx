@@ -2,6 +2,7 @@ import { db } from '../../firebase.config.js';
 import { collection, doc, setDoc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const usersCollection = collection(db, 'users');
+const coinsRef = collection(db, 'coins');
 
 export const createUser = async (uid, userData) => {
   try {

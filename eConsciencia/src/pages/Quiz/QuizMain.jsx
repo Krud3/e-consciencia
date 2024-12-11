@@ -1,11 +1,14 @@
-// src/pages/contamination/BlockWorldMain.jsx
-import React, {useEffect} from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import React, { useEffect } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
-import Lights from '@/pages/contamination/lights/Lights'
+import Lights from '@/pages/contamination/lights/Lights';
 import Controls from '@/pages/contamination/controls/Controls';
 import useControlStore from '@/store/use-control-store';
 import QuizBlockWorld from '@/pages/Quiz/QuizBlockWorld';
+
+import DialogContext from '@/components/DialogContext';
+
+
 import GarbagePile from './GarbagePile';
 import GrassSeaLong from './GrassSeaLong';
 import TrashBin from './TrashBin';
@@ -15,9 +18,19 @@ import SickCorals from './SickCorals';
 import HealthyCorals from './HealthyCorals';
 import Factory from './Factory';
 import Tree from './Tree';
+
 const QuizMain = () => {
-  const { quizDataCamera, indexQuiz, handleNexQuiz, handlePrevQuiz } = useControlStore();
+  const { 
+    quizDataCamera, 
+    indexQuiz, 
+    handleNexQuiz, 
+    handlePrevQuiz, 
+    dataQuiz 
+  } = useControlStore();
+
   const cameraSettings = quizDataCamera[indexQuiz];
+
+  const { title, text } = dataQuiz[indexQuiz];
 
   const [visibilityMap, setVisibilityMap] = React.useState({
     GarbagePile: false,
@@ -69,6 +82,7 @@ const QuizMain = () => {
     }
   }, [indexQuiz, quizDataCamera]);
 
+
   useEffect(() => {
     const cameraPosition = quizDataCamera[indexQuiz].position;
     console.log(cameraPosition);
@@ -112,7 +126,7 @@ const QuizMain = () => {
   useEffect(() => {
     console.log('currentIndex', indexQuiz);
     console.log('cameraSettings', cameraSettings);
-  } , [indexQuiz]);
+  }, [indexQuiz]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -128,17 +142,26 @@ const QuizMain = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [handlePrevQuiz, handleNexQuiz]);
+
   return (
     <>
+
+      <DialogContext
+        title={title}
+        text={text}
+        onCancel={() => console.log('Cancel pressed')}
+        onValidate={() => console.log('Validate pressed')}
+      /> 
       <Canvas 
-         
         camera={{
           position: cameraSettings.position,
           fov: cameraSettings.fov,
           near: cameraSettings.near,
           far: cameraSettings.far,
           zoom: cameraSettings.zoom,
-        }}shadows>
+        }} 
+        shadows
+      >
         <Controls cameraSettings={cameraSettings} />
         <Lights />
         <Environment
