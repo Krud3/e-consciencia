@@ -99,10 +99,7 @@ const Header = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Languages</DropdownMenuItem>
+
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link to ="/signin" onClick={() => logout()} className="text-muted-foreground hover:text-foreground">

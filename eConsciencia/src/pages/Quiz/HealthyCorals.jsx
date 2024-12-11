@@ -1,20 +1,27 @@
 import { useGLTF } from "@react-three/drei";
 import React, {useState} from "react";
-import { RigidBody } from "@react-three/rapier";
 
-const HealthyCorals = ( {visible=true, ...props}) =>{
+const HealthyCorals = ({ visible=true, onObjectClick, ...props }) => {
     const {nodes, materials} = useGLTF("/3d-models-quiz/coral_yellow.glb");
     const [hovered, setHovered] = useState(false);
-    const handlePointerOver = (event) => {
-      document.body.style.cursor = "pointer";  // Changes the pointer to "hand"
+
+    const handlePointerOver = () => {
+      document.body.style.cursor = "pointer";
     };
   
-    const handlePointerOut = (event) => {
-      document.body.style.cursor = "default";  // Restore the pointe to original
+    const handlePointerOut = () => {
+      document.body.style.cursor = "default";
     };
+
+    const handlePointerDown = () => {
+      if (onObjectClick) onObjectClick();
+    }
+
     return visible? (
-        <group {...props}
-       
+      <group {...props}
+        onPointerOver={() => {setHovered(true); handlePointerOver();}}
+        onPointerOut={() => {setHovered(false); handlePointerOut();}}
+        onPointerDown={handlePointerDown}
         dispose={null}>
         <group name="Scene">
           <mesh
@@ -26,23 +33,11 @@ const HealthyCorals = ( {visible=true, ...props}) =>{
             rotation={[Math.PI / 2, 0, 0]}
             scale={hovered ? 0.04: 0.03}
             position={[3, -5.6, 3]}
-            onPointerOver={(event) => {
-            setHovered(true);
-            handlePointerOver(event);
-            }}
-            onPointerOut={(event) => {
-            setHovered(false);
-            handlePointerOut(event);
-            }}
-              
           />
         </group>
       </group>
-       
     ):null;
 };
 
-
 export default HealthyCorals;
-
 useGLTF.preload("/3d-models-quiz/coral_yellow.glb");

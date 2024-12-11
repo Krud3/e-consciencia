@@ -1,39 +1,42 @@
 import { useGLTF } from "@react-three/drei";
 import React, {useState} from "react";
 
-const GarbagePile = (props) => {
+const GarbagePile = ({ visible=true, onObjectClick, ...props }) => {
     const {nodes, materials} = useGLTF("/3d-models-quiz/garbage_pile.glb");
     const [hovered, setHovered] = useState(false);
-    const handlePointerOver = (event) => {
-      document.body.style.cursor = "pointer";  // Changes the pointer to "hand"
+
+    const handlePointerOver = () => {
+      document.body.style.cursor = "pointer";
     };
   
-    const handlePointerOut = (event) => {
-      document.body.style.cursor = "default";  // Restore the pointe to original
+    const handlePointerOut = () => {
+      document.body.style.cursor = "default";
     };
 
-    return (
+    const handlePointerDown = () => {
+      if (onObjectClick) onObjectClick();
+    }
+
+    return visible ? (
         <group {...props}
-        onPointerOver={() => setHovered(true)}  // Cuando el mouse pasa por encima
-        onPointerOut={() => setHovered(false)}  // Cuando el mouse sale del objeto
-        dispose={null}>
-        <group name="Scene">
-          <mesh
-            name="garbage_pile"
-            castShadow
-            receiveShadow
-            geometry={nodes.garbage_pile.geometry}
-            material={materials['atlas_LPUP.004']}
-            rotation={[Math.PI / 2, 0, 0]}
-            scale={hovered ? 0.015 : 0.01} 
-            onPointerOver={handlePointerOver}
-            onPointerOut={handlePointerOut}
-          />
+          onPointerOver={() => {setHovered(true); handlePointerOver();}}
+          onPointerOut={() => {setHovered(false); handlePointerOut();}}
+          onPointerDown={handlePointerDown}
+          dispose={null}>
+          <group name="Scene">
+            <mesh
+              name="garbage_pile"
+              castShadow
+              receiveShadow
+              geometry={nodes.garbage_pile.geometry}
+              material={materials['atlas_LPUP.004']}
+              rotation={[Math.PI / 2, 0, 0]}
+              scale={hovered ? 0.015 : 0.01}
+            />
+          </group>
         </group>
-      </group>
-    );
+    ):null;
 };
 
 export default GarbagePile;
-
 useGLTF.preload("/3d-models-quiz/garbage_pile.glb");

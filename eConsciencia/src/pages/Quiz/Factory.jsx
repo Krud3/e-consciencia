@@ -2,30 +2,29 @@ import { useGLTF } from "@react-three/drei";
 import React, {useState} from "react";
 
 const Factory = ( {visible=true, ...props}) =>{
-    const {nodes, materials} = useGLTF("/3d-models-quiz/factory.glb");
-    const [hovered, setHovered] = useState(false);
-    const handlePointerOver = (event) => {
-      document.body.style.cursor = "pointer";  // Changes the pointer to "hand"
-    };
-  
-    const handlePointerOut = (event) => {
-      document.body.style.cursor = "default";  // Restore the pointe to original
-    };
+  const {nodes, materials} = useGLTF("/3d-models-quiz/factory.glb");
+  const [hovered, setHovered] = useState(false);
+
+  const handlePointerOver = () => {
+    document.body.style.cursor = "pointer";
+  };
+
+  const handlePointerOut = () => {
+    document.body.style.cursor = "default";
+  };
+
+  const handlePointerDown = () => {
+    if (onObjectClick) onObjectClick();
+  }
     return visible? (
-    <group {...props} 
-    onPointerOver={(event) => {
-        setHovered(true);
-        handlePointerOver(event);
-      }}
-      onPointerOut={(event) => {
-        setHovered(false);
-        handlePointerOut(event);
-      }}
-      
-    scale={hovered ? 0.12 : 0.1}
-    position={[0.1, 0, -8]}
-    rotation={[0,3.9,0]}
-    dispose={null}>
+      <group {...props} 
+      onPointerOver={() => {setHovered(true); handlePointerOver();}}
+      onPointerOut={() => {setHovered(false); handlePointerOut();}}
+      onPointerDown={handlePointerDown}
+      scale={hovered ? 0.12 : 0.1}
+      position={[0.1, 0, -8]}
+      rotation={[0,3.9,0]}
+      dispose={null}>
       <mesh
         castShadow
         receiveShadow
