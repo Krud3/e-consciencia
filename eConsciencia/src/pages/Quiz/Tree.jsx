@@ -1,27 +1,27 @@
 import { useGLTF } from "@react-three/drei";
 import React, {useState} from "react";
 
-const Tree = ( {visible=true, ...props}) =>{
+const Tree = ({ visible=true, onObjectClick, ...props }) =>{
     const {nodes, materials} = useGLTF("/3d-models-quiz/tree_maple.glb");
     const [hovered, setHovered] = useState(false);
-    const handlePointerOver = (event) => {
-      document.body.style.cursor = "pointer";  // Changes the pointer to "hand"
+
+    const handlePointerOver = () => {
+      document.body.style.cursor = "pointer";
     };
   
-    const handlePointerOut = (event) => {
-      document.body.style.cursor = "default";  // Restore the pointe to original
+    const handlePointerOut = () => {
+      document.body.style.cursor = "default";
     };
+
+    const handlePointerDown = () => {
+      if (onObjectClick) onObjectClick();
+    }
+
     return visible? (
-        <group {...props} 
-        onPointerOver={(event) => {
-        setHovered(true);
-        handlePointerOver(event);
-        }}
-        onPointerOut={(event) => {
-        setHovered(false);
-        handlePointerOut(event);
-        }}
-        
+      <group {...props}
+        onPointerOver={() => {setHovered(true); handlePointerOver();}}
+        onPointerOut={() => {setHovered(false); handlePointerOut();}}
+        onPointerDown={handlePointerDown}
         scale={hovered ? 0.4 : 0.3}
         position={[2.5, 0, -6]}
         dispose={null}>
@@ -34,11 +34,8 @@ const Tree = ( {visible=true, ...props}) =>{
           scale={0.01}
         />
       </group>
-
     ):null;
 };
 
-
 export default Tree;
-
 useGLTF.preload("/3d-models-quiz/tree_maple.glb");

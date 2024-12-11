@@ -23,7 +23,7 @@ const useCoinsStore = create((set, get) => ({
     }
   },
 
-  incrementCoins: async (uid, amount = 1) => {
+  incrementCoins: async (uid, amount = 10) => {
     const newCoins = get().coins + amount;
     set({ coins: newCoins });
     // Actualizamos en Firestore

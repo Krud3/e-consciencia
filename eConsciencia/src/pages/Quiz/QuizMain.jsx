@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import Lights from '@/pages/contamination/lights/Lights';
 import Controls from '@/pages/contamination/controls/Controls';
 import useControlStore from '@/store/use-control-store';
+import useAuthStore from '@/store/use-auth-store';
+import useCoinsStore from '@/store/use-coin-store';
+
 import QuizBlockWorld from '@/pages/Quiz/QuizBlockWorld';
-
 import DialogContext from '@/components/DialogContext';
-
 
 import GarbagePile from './GarbagePile';
 import GrassSeaLong from './GrassSeaLong';
@@ -28,11 +29,13 @@ const QuizMain = () => {
     dataQuiz 
   } = useControlStore();
 
-  const cameraSettings = quizDataCamera[indexQuiz];
+  const { user } = useAuthStore(); // Para obtener uid
+  const { incrementCoins, decrementCoins } = useCoinsStore();
 
+  const cameraSettings = quizDataCamera[indexQuiz];
   const { title, text } = dataQuiz[indexQuiz];
 
-  const [visibilityMap, setVisibilityMap] = React.useState({
+  const [visibilityMap, setVisibilityMap] = useState({
     GarbagePile: false,
     GrassSeaLong: false,
     TrashBin: false,
@@ -44,85 +47,60 @@ const QuizMain = () => {
   });
 
   useEffect(() => {
-    const cameraPosition = quizDataCamera[indexQuiz].position;
-    console.log(cameraPosition);
-    // Determina visibilidad según la posición de la cámara
-    if (cameraPosition[0] === 0 && cameraPosition[1] === -20 && cameraPosition[2] === 5) {
-      // CONTAMINATION: Activa los objetos
-      setVisibilityMap({
-        GarbagePile: true,
-        GrassSeaLong: true,
-      });
-    } else {
-      // En cualquier otra posición: Desactiva los objetos
-      setVisibilityMap({
-        GarbagePile: false,
-        GrassSeaLong: false,
-      });
-    }
-  }, [indexQuiz, quizDataCamera]);
+    let newVisibility = {
+      GarbagePile: false,
+      GrassSeaLong: false,
+      TrashBin: false,
+      RecycleBin: false,
+      SickCorals: false,
+      HealthyCorals: false,
+      Factory: false,
+      Tree: false,
+    };
 
-  useEffect(() => {
-    const cameraPosition = quizDataCamera[indexQuiz].position;
-    console.log(cameraPosition);
-    // Determina visibilidad según la posición de la cámara
-    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === -10) {
-      // CONTAMINATION: Activa los objetos
-      setVisibilityMap({
-        TrashBin: true,
-        RecycleBin: true, 
-       
-      });
-    } else {
-      // En cualquier otra posición: Desactiva los objetos
-      setVisibilityMap({
-        TrashBin: false,
-        RecycleBin: false,
-      });
+    switch (indexQuiz) {
+      case 3:
+        newVisibility.GarbagePile = true;
+        newVisibility.GrassSeaLong = true;
+        break;
+      case 4:
+        newVisibility.TrashBin = true;
+        newVisibility.RecycleBin = true;
+        break;
+      case 5:
+        newVisibility.SickCorals = true;
+        newVisibility.HealthyCorals = true;
+        break;
+      case 6:
+        newVisibility.Factory = true;
+        newVisibility.Tree = true;
+        break;
+      default:
+        break;
     }
-  }, [indexQuiz, quizDataCamera]);
 
+    setVisibilityMap(newVisibility);
+  }, [indexQuiz]);
 
-  useEffect(() => {
-    const cameraPosition = quizDataCamera[indexQuiz].position;
-    console.log(cameraPosition);
-    // Determina visibilidad según la posición de la cámara
-    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === 10) {
-      // ACIDIFICACION: Activa los objetos
-      setVisibilityMap({
-        SickCorals: true,
-        HealthyCorals: true, 
-       
-      });
+  // Funciones para manejar clicks
+  const handleIncrementClick = () => {
+    if (user?.uid) {
+      incrementCoins(user.uid, 10); // Suma 1 moneda
     } else {
-      // En cualquier otra posición: Desactiva los objetos
-      setVisibilityMap({
-        SickCorals: false,
-        HealthyCorals: false,
-      });
+      console.log("No user logged in");
     }
-  }, [indexQuiz, quizDataCamera]);
+    handleNexQuiz(); // Cambiamos de cámara
+  };
 
-  useEffect(() => {
-    const cameraPosition = quizDataCamera[indexQuiz].position;
-    console.log(cameraPosition);
-    // Determina visibilidad según la posición de la cámara
-    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === -7) {
-      // ACIDIFICACION: Activa los objetos
-      setVisibilityMap({
-       Factory: true,
-       Tree: true,
-       
-      });
+  const handleDecrementClick = () => {
+    if (user?.uid) {
+      decrementCoins(user.uid, 10); // Resta 10 monedas
     } else {
-      // En cualquier otra posición: Desactiva los objetos
-      setVisibilityMap({
-        Factory: false,
-        Tree: false,
-      });
+      console.log("No user logged in");
     }
-  }, [indexQuiz, quizDataCamera]);
-  
+    handleNexQuiz(); // Cambiamos de cámara
+  };
+
   useEffect(() => {
     console.log('currentIndex', indexQuiz);
     console.log('cameraSettings', cameraSettings);
@@ -145,13 +123,13 @@ const QuizMain = () => {
 
   return (
     <>
-
       <DialogContext
         title={title}
         text={text}
         onCancel={() => console.log('Cancel pressed')}
         onValidate={() => console.log('Validate pressed')}
       /> 
+
       <Canvas 
         camera={{
           position: cameraSettings.position,
@@ -169,42 +147,51 @@ const QuizMain = () => {
           background
         />  
         <QuizBlockWorld />
+        
+        {/* Incrementan monedas al clicar */}
         <GarbagePile 
           position={[-2, -0.3, 10]}
           scale={[2.5,2.5,2.5]}
           visible={visibilityMap.GarbagePile}
-        />     
-        <GrassSeaLong 
-          visible={visibilityMap.GrassSeaLong}
-        />  
-        <TrashBin
-        visible={visibilityMap.TrashBin}
-        />
+          onObjectClick={handleIncrementClick}
+        />    
         <Physics>
-          <RecycleBin
+        <RecycleBin
           visible={visibilityMap.RecycleBin}
-          />
-        </Physics>
-        <Physics>
-          <SickCorals
-          visible={visibilityMap.SickCorals}
-          />
-        </Physics>
+          onObjectClick={handleIncrementClick}
+        />
+          </Physics> 
+        
         <HealthyCorals
           visible={visibilityMap.HealthyCorals}
+          onObjectClick={handleIncrementClick}
+        />
+        <Tree
+          visible={visibilityMap.Tree}
+          onObjectClick={handleIncrementClick}
+        />
+
+        {/* Disminuyen monedas al clicar */}
+        <GrassSeaLong 
+          visible={visibilityMap.GrassSeaLong}
+          onObjectClick={handleDecrementClick}
+        />  
+        <TrashBin
+          visible={visibilityMap.TrashBin}
+          onObjectClick={handleDecrementClick}
+        />
+        <Physics>
+          <SickCorals
+            visible={visibilityMap.SickCorals}
+            onObjectClick={handleDecrementClick}
+          />
+        </Physics>
+        <Factory
+          visible={visibilityMap.Factory}
+          onObjectClick={handleDecrementClick}
         />
         
-        <Factory
-        visible={visibilityMap.Factory}
-        />
-          
-        <Tree
-        visible={visibilityMap.Tree}
-        />
-          
-    
       </Canvas>
-      
     </>
   );
 };
