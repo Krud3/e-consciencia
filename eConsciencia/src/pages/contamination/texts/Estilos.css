@@ -1,0 +1,46 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+@font-face {
+    font-family: "Funnel";
+    src: url("FunnelDisplay-VariableFont_wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
+.text-info {
+    width: 800px;
+    height: auto;
+    background-color: white; /* Fondo blanco */
+    padding: 10px; /* Espaciado interno alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 1px solid rgba(0, 0, 0, 0.2); /* Borde tenue */
+    color: black; /* Color de texto para contraste */
+    font-family: "Funnel",;
+    line-height: 1.5; /* Espaciado entre líneas */
+    font-size: 24px;
+  }
+
+  .text-tittle {
+    /*background-color: rgb(35, 140, 252); /* Fondo blanco */
+    padding: 10px; /* Espaciado interno alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 1px solid rgba(0, 0, 0, 0.2); /* Borde tenue */
+    color: rgb(255, 255, 255); /* Color de texto para contraste */
+    font-family: "Funnel", ;
+    line-height: 1.5; /* Espaciado entre líneas */
+    font-size: 36px;
+  }

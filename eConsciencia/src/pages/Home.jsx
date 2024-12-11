@@ -16,14 +16,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import World from './World';
-
 const Home = () => {
   return (
-    <div className="h-screen overflow-y-auto"> 
-      <Introduction />
-      <CarouselSection />
-
+    <div className="flex flex-col h-screen">
+      <main className="flex-grow overflow-y-auto"> 
+        <Introduction />
+        <CarouselSection />
       {/* Contenedor de las tarjetas en una fila */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-6 my-4 px-4">
 
@@ -31,8 +29,8 @@ const Home = () => {
          <Link to="/Shortage" className="w-full md:w-1/2 lg:w-1/4">
           <Card className="shadow-lg lg:max-w-sm p-4">
             <CardHeader className="pb-2">
-              <CardTitle>Introduction</CardTitle>
-              <CardDescription>Water Shortage</CardDescription>
+              <CardTitle>Water Shortage</CardTitle>
+              <CardDescription>Introduction</CardDescription>
             </CardHeader>
             <CardContent>
               <img src={"Freshwater-shortages.jpg"} alt="water contamination" className="w-full h-36 object-cover" />
@@ -49,8 +47,8 @@ const Home = () => {
         <Link to="/contamination" className="w-full md:w-1/2 lg:w-1/4">
           <Card className="shadow-lg lg:max-w-sm p-4">
             <CardHeader className="pb-2">
-              <CardTitle>Introduction</CardTitle>
-              <CardDescription>Water Contamination</CardDescription>
+              <CardTitle>Water Contamination</CardTitle>
+              <CardDescription>Introduction</CardDescription>
             </CardHeader>
             <CardContent>
               <img src={contaminacionAgua} alt="water contamination" className="w-full h-36 object-cover" />
@@ -67,8 +65,8 @@ const Home = () => {
         <Link to="/acidification" className="w-full md:w-1/2 lg:w-1/4 ">
           <Card className="shadow-lg lg:max-w-sm p-4">
             <CardHeader className="pb-2">
-              <CardTitle>Introduction</CardTitle>
-              <CardDescription>Water Acidification</CardDescription>
+              <CardTitle>Water Acidification</CardTitle>
+              <CardDescription>Introduction</CardDescription>
             </CardHeader>
             <CardContent>
               <img src={CO2} alt="Water Acidification" className="w-full h-36 object-cover" />
@@ -80,8 +78,8 @@ const Home = () => {
             </CardFooter>
           </Card>
         </Link>
-
-      </div>
+        </div>
+      </main>
 
       <Footer />
     </div>

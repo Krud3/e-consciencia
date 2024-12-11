@@ -13,8 +13,8 @@ const Lights = () => {
         <>  
             <ambientLight color = {"#ffe3d6"} intensity={0.5} />
             <directionalLight
-                position={[4, 2.5, -10]}
-                intensity={10}
+                position={[5, 2.2, 10]}
+                intensity={12}
                 castShadow
             />
                   {/* Lights and shadows in important positions */}
