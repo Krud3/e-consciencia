@@ -6,7 +6,7 @@ import Lights from '@/pages/contamination/lights/Lights'
 import Controls from '@/pages/contamination/controls/Controls';
 import useControlStore from '@/store/use-control-store';
 import QuizBlockWorld from '@/pages/Quiz/QuizBlockWorld';
-import GarbagePile from './Garbagepile';
+import GarbagePile from './GarbagePile';
 import GrassSeaLong from './GrassSeaLong';
 import TrashBin from './TrashBin';
 import RecycleBin from './RecycleBin';
