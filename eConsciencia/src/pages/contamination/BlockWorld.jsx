@@ -17,7 +17,7 @@ const BlockWorld = (props) => {
       material.metalness = 0.0;  // Aplica metalness
     });
   }, [materials]);
-  const trash1 = useRef();
+
   const { position } = useSpring({
     from: { position: [52.055, 0, 10.11] },
     to: { position: [52.055, 0.05, 10.11] },
@@ -25,8 +25,18 @@ const BlockWorld = (props) => {
     config: { duration: 50 }, // Ajusta la duración para velocidad más rápida/lenta
   });
 
+  const trash1 = useRef();
+  const trash2 = useRef();
+  const trash3 = useRef();
+  const trash4 = useRef();
+
+
+
   const handleTrashClick = useCallback(() =>{
     trash1.current.applyImpulse({x:0, y:20,z:-5}, true);
+    trash2.current.applyImpulse({x:0, y:20,z:-5}, true);
+    trash3.current.applyImpulse({x:0, y:20,z:-5}, true);
+    trash4.current.applyImpulse({x:0, y:20,z:-5}, true);
   }, [])
   return (
     <group ref={group} {...props} dispose={null}>
@@ -1059,39 +1069,49 @@ const BlockWorld = (props) => {
           rotation={[Math.PI / 2, 0, 0.908]}
           scale={0.01}
         />
+        <RigidBody ref={trash2} type='dynamic'>
         <mesh
+        onClick={handleTrashClick}
           name="garbage_bag"
           geometry={nodes.garbage_bag.geometry}
           material={materials['atlas_LPUP.033']}
-          position={[43.239, 0, 19.197]}
+          position={[43.239, 0.2, 19.197]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.01}
-        />
+          castShadow
+        /></RigidBody>
+        <RigidBody ref={trash3} type='dynamic'> 
         <mesh
+        onClick={handleTrashClick}
           name="garbage_open_a"
           geometry={nodes.garbage_open_a.geometry}
           material={materials['atlas_LPUP.034']}
-          position={[46.023, 0.45, 23.231]}
+          position={[46.023, 0.4, 23.231]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.01}
-        />
+          castShadow
+        /></RigidBody>
+        <RigidBody ref={trash4} type='dynamic'> 
         <mesh
+        onClick={handleTrashClick}
           name="garbage_open_b"
           geometry={nodes.garbage_open_b.geometry}
           material={materials['atlas_LPUP.035']}
-          position={[44.887, 0.34, 21.583]}
+          position={[44.887, 0.36, 21.583]}
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.01}
-        />
-        <RigidBody ref={trash1}>
+          castShadow
+        /></RigidBody>
+        <RigidBody ref={trash1} type='dynamic'>
           <mesh
             onClick={handleTrashClick}
             name="garbage_pile"
             geometry={nodes.garbage_pile.geometry}
             material={materials['atlas_LPUP.036']}
-            position={[42.671, 0.32, 22.151]}
+            position={[42.671, 0.32, 24.151]}
             rotation={[Math.PI / 2, 0, 0]}
             scale={0.01}
+            castShadow
           />
         </RigidBody>
 
