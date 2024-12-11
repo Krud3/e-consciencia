@@ -6,13 +6,37 @@ import Lights from '@/pages/contamination/lights/Lights'
 import Controls from '@/pages/contamination/controls/Controls';
 import useControlStore from '@/store/use-control-store';
 import QuizBlockWorld from '@/pages/Quiz/QuizBlockWorld';
-
+import GarbagePile from './Garbagepile';
+import GrassSeaLong from './GrassSeaLong';
 
 const QuizMain = () => {
   const { quizDataCamera, indexQuiz, handleNexQuiz, handlePrevQuiz } = useControlStore();
   const cameraSettings = quizDataCamera[indexQuiz];
 
+  const [visibilityMap, setVisibilityMap] = React.useState({
+    GarbagePile: false,
+    GrassSeaLong: false,
+  });
 
+  useEffect(() => {
+    const cameraPosition = quizDataCamera[indexQuiz].position;
+    console.log(cameraPosition);
+    // Determina visibilidad según la posición de la cámara
+    if (cameraPosition[0] === 0 && cameraPosition[1] === -20 && cameraPosition[2] === 5) {
+      // CONTAMINATION: Activa los objetos
+      setVisibilityMap({
+        GarbagePile: true,
+        GrassSeaLong: true,
+      });
+    } else {
+      // En cualquier otra posición: Desactiva los objetos
+      setVisibilityMap({
+        GarbagePile: false,
+        GrassSeaLong: false,
+      });
+    }
+  }, [indexQuiz, quizDataCamera]);
+  
   useEffect(() => {
     console.log('currentIndex', indexQuiz);
     console.log('cameraSettings', cameraSettings);
@@ -48,7 +72,15 @@ const QuizMain = () => {
           files="/hdris/kloofendal_48d_partly_cloudy_puresky_1k.hdr"
           background
         />  
-        <QuizBlockWorld />      
+        <QuizBlockWorld />
+        <GarbagePile 
+          position={[-2, -0.3, 10]}
+          scale={[2.5,2.5,2.5]}
+          visible={visibilityMap.GarbagePile}
+        />     
+        <GrassSeaLong 
+          visible={visibilityMap.GrassSeaLong}
+        />  
 
       </Canvas>
     </>
