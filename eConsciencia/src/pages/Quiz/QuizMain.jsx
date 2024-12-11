@@ -13,6 +13,8 @@ import RecycleBin from './RecycleBin';
 import { Physics } from '@react-three/rapier';
 import SickCorals from './SickCorals';
 import HealthyCorals from './HealthyCorals';
+import Factory from './Factory';
+import Tree from './Tree';
 const QuizMain = () => {
   const { quizDataCamera, indexQuiz, handleNexQuiz, handlePrevQuiz } = useControlStore();
   const cameraSettings = quizDataCamera[indexQuiz];
@@ -24,6 +26,8 @@ const QuizMain = () => {
     RecycleBin: false,
     SickCorals: false,
     HealthyCorals: false,
+    Factory: false,
+    Tree: true,
   });
 
   useEffect(() => {
@@ -81,6 +85,26 @@ const QuizMain = () => {
       setVisibilityMap({
         SickCorals: false,
         HealthyCorals: false,
+      });
+    }
+  }, [indexQuiz, quizDataCamera]);
+
+  useEffect(() => {
+    const cameraPosition = quizDataCamera[indexQuiz].position;
+    console.log(cameraPosition);
+    // Determina visibilidad según la posición de la cámara
+    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === -9) {
+      // ACIDIFICACION: Activa los objetos
+      setVisibilityMap({
+       Factory: true,
+       Tree: true,
+       
+      });
+    } else {
+      // En cualquier otra posición: Desactiva los objetos
+      setVisibilityMap({
+        Factory: false,
+        Tree: false,
       });
     }
   }, [indexQuiz, quizDataCamera]);
@@ -146,6 +170,12 @@ const QuizMain = () => {
         <HealthyCorals>
         visible={visibilityMap.HealthyCorals}
         </HealthyCorals>
+        <Factory>
+        visible={visibilityMap.Factory}
+        </Factory>
+        <Tree>
+        visible={visibilityMap.Tree}
+        </Tree>
         
       </Canvas>
       

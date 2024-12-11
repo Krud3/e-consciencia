@@ -239,8 +239,8 @@ const useControlStore = create((set) => ({
       zoom: 1,
     },
     {//tercera escena pregunta 2
-      position: [0, 0, -10],
-      target: [9, 0, -10],
+      position: [0, 0, -7],
+      target: [1, 0, -5],
       fov: 75,
       near: 0.1,
       far: 1000,
