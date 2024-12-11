@@ -335,6 +335,7 @@ const BlockWorld = (props) => {
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.01}
           castShadow
+          receiveShadow
         />
         <group
           name="tractor"
@@ -1164,70 +1165,7 @@ const BlockWorld = (props) => {
           scale={0.01}
           castShadow
         />
-        <mesh
-          name="seagull"
-          geometry={nodes.seagull.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-48.299, 11.955, 5.757]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull001"
-          geometry={nodes.seagull001.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-45.026, 11.955, 13.598]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull002"
-          geometry={nodes.seagull002.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-48.299, 11.955, 17.211]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull003"
-          geometry={nodes.seagull003.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-45.026, 11.955, 25.052]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull004"
-          geometry={nodes.seagull004.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-42.708, 11.955, 5.076]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull005"
-          geometry={nodes.seagull005.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-39.436, 11.955, 12.916]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull006"
-          geometry={nodes.seagull006.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-42.708, 11.955, 16.53]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull007"
-          geometry={nodes.seagull007.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-39.436, 11.955, 24.37]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
+        
         
         <group
           name="trash_can"

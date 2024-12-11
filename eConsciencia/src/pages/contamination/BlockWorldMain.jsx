@@ -1,7 +1,6 @@
-// src/pages/contamination/BlockWorldMain.jsx
 import React, {useEffect, useCallback, useRef, useState } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
-import { Environment } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { Environment, PositionalAudio } from '@react-three/drei';
 import BlockWorld from './BlockWorld';
 import Shark from './Shark';
 import Lights from './lights/Lights';
@@ -10,12 +9,16 @@ import Bienvenida from './texts/Bienvenida';
 import Controls from './controls/Controls';
 import useControlStore from '@/store/use-control-store';
 import { Physics } from '@react-three/rapier';
-import { PositionalAudio } from '@react-three/drei';
+import SeaGull from './SeaGull';
+import SeaGull2 from './SeaGull2';
+import SeaGull3 from './SeaGull3';
+import SeaGull4  from './SeaGull4';
+import SeaGull5 from './SeaGull5';
+import SeaGull6 from './SeaGull6';
 
 const BlockWorldMain = () => {
   const { isPlaying, dataCamera, currentIndex } = useControlStore();
   const cameraSettings = isPlaying ? dataCamera[currentIndex+1] : dataCamera[0];
-
 
   useEffect(() => {
     console.log('currentIndex', currentIndex);
@@ -69,7 +72,7 @@ const BlockWorldMain = () => {
           far: cameraSettings.far,
           zoom: cameraSettings.zoom,
           rotation: cameraSettings.rotation,
-        }}shadows>
+        }} shadows>
         <Controls cameraSettings={cameraSettings} />
         <Lights />
         <Environment
@@ -78,14 +81,52 @@ const BlockWorldMain = () => {
         />
         <Physics >
           <BlockWorld />
-          <Shark  position={[0.305, -2.899, 54.539]}/>
+          <Shark position={[0.305, -2.899, 54.539]} />
+
+
+          <SeaGull 
+            key={1}
+            orbitCenter={[-48, 11.955, 5.757]}
+            radius={20} 
+            angleOffset={(Math.PI )} // distribuido en el círculo
+          />
+          <SeaGull2 
+            key={2}
+            orbitCenter={[-48, 11.955, 5.757]}
+            radius={15} 
+            angleOffset={(Math.PI )} // distribuido en el círculo
+          />
+                    <SeaGull3 
+            key={3}
+            orbitCenter={[-48, 11.955, 5.757]}
+            radius={17} 
+            angleOffset={(Math.PI/2 +3)} // distribuido en el círculo
+          />
+                    <SeaGull4 
+            key={4}
+            orbitCenter={[-48, 11.955, 5.757]}
+            radius={16} 
+            angleOffset={(Math.PI/2 +4)} // distribuido en el círculo
+          />
+                    <SeaGull5 
+            key={5}
+            orbitCenter={[-48, 11.955, 5.757]}
+            radius={14} 
+            angleOffset={(Math.PI/2 +1)} // distribuido en el círculo
+          />
+                    <SeaGull6 
+            key={6}
+            orbitCenter={[-48, 11.955, 5.757]}
+            radius={13} 
+            angleOffset={(Math.PI/2 )} // distribuido en el círculo
+          />
         </Physics>
         <group position={[52.055, 0, 10.11]}>
-            <PositionalAudio ref={tractorAudioRef} loop url="/sounds/tractor.mp3" distance={2} />
+          <PositionalAudio ref={tractorAudioRef} loop url="/sounds/tractor.mp3" distance={2} />
         </group>
 
         <group position={[0.305, -2.899, 60.539]}>
-            <PositionalAudio ref={seaAudioRef} loop url="/sounds/sea.mp3" distance={2} />
+          <PositionalAudio ref={seaAudioRef} loop url="/sounds/sea.mp3" distance={2} />
         </group>
         <Controllers />
         {!isPlaying && <Bienvenida />}
