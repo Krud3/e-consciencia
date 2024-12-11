@@ -9,6 +9,8 @@ import Header from "@/components/Header/Header";
 import QuizMain from "@/pages/Quiz/QuizMain";
 import { Outlet } from "react-router-dom";
 
+import QuizShortage from "@/pages/Quiz/QuizShortage/QuizShortage";
+
 const LayoutWithHeader = () => (
   <>
     <Header />
@@ -24,6 +26,7 @@ const App = () => {
         <Route path="/" element={<AuthComponent />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/signin" element={<AuthComponent />} />
+        <Route path="/quiz-shortage" element={<QuizShortage />} />
 
         {/* Rutas con Header */}
         <Route element={<LayoutWithHeader />}>
@@ -31,7 +34,7 @@ const App = () => {
           <Route path="/acidification" element={<Acidification />} />
           <Route path="/contamination" element={<BlockWorldMain />} />
           <Route path="/shortage" element={<Shortage />} />
-          <Route path="/quiz" element={<QuizMain />}/>
+          <Route path="/quiz" element={<QuizMain />} />
         </Route>
       </Routes>
     </Router>
