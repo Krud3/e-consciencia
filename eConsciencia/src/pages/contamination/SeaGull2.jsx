@@ -59,6 +59,7 @@ export function SeaGull2({ orbitCenter = [0,0,0], radius = 20, angleOffset = 0, 
               geometry={nodes.seagull.geometry}
               material={materials.atlas_LPUP}
               skeleton={nodes.seagull.skeleton}
+              castShadow
             />
             <primitive object={nodes.Bone} />
             <primitive object={nodes.Bone004} />
