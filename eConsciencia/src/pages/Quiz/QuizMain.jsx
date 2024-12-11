@@ -10,6 +10,9 @@ import GarbagePile from './Garbagepile';
 import GrassSeaLong from './GrassSeaLong';
 import TrashBin from './TrashBin';
 import RecycleBin from './RecycleBin';
+import { Physics } from '@react-three/rapier';
+import SickCorals from './SickCorals';
+import HealthyCorals from './HealthyCorals';
 const QuizMain = () => {
   const { quizDataCamera, indexQuiz, handleNexQuiz, handlePrevQuiz } = useControlStore();
   const cameraSettings = quizDataCamera[indexQuiz];
@@ -18,7 +21,9 @@ const QuizMain = () => {
     GarbagePile: false,
     GrassSeaLong: false,
     TrashBin: false,
-    RecycleBin: true,
+    RecycleBin: false,
+    SickCorals: false,
+    HealthyCorals: false,
   });
 
   useEffect(() => {
@@ -59,6 +64,26 @@ const QuizMain = () => {
       });
     }
   }, [indexQuiz, quizDataCamera]);
+
+  useEffect(() => {
+    const cameraPosition = quizDataCamera[indexQuiz].position;
+    console.log(cameraPosition);
+    // Determina visibilidad según la posición de la cámara
+    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === 10) {
+      // ACIDIFICACION: Activa los objetos
+      setVisibilityMap({
+        SickCorals: true,
+        HealthyCorals: true, 
+       
+      });
+    } else {
+      // En cualquier otra posición: Desactiva los objetos
+      setVisibilityMap({
+        SickCorals: false,
+        HealthyCorals: false,
+      });
+    }
+  }, [indexQuiz, quizDataCamera]);
   
   useEffect(() => {
     console.log('currentIndex', indexQuiz);
@@ -81,7 +106,8 @@ const QuizMain = () => {
   }, [handlePrevQuiz, handleNexQuiz]);
   return (
     <>
-      <Canvas  
+      <Canvas 
+         
         camera={{
           position: cameraSettings.position,
           fov: cameraSettings.fov,
@@ -107,11 +133,22 @@ const QuizMain = () => {
         <TrashBin
         visible={visibilityMap.TrashBin}
         />
-        <RecycleBin
-        visible={visibilityMap.RecycleBin}
-        />
-
+        <Physics>
+          <RecycleBin
+          visible={visibilityMap.RecycleBin}
+          />
+        </Physics>
+        <Physics>
+          <SickCorals
+          visible={visibilityMap.SickCorals}
+          />
+        </Physics>
+        <HealthyCorals>
+        visible={visibilityMap.HealthyCorals}
+        </HealthyCorals>
+        
       </Canvas>
+      
     </>
   );
 };
