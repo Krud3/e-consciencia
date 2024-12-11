@@ -2,11 +2,17 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Text3D } from "@react-three/drei";
 import LightsShortage from "./lights/LightsShortage";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { Sky, Stars } from "@react-three/drei";
-
+import { PositionalAudio } from "three";
+import {
+  EffectComposer,
+  Bloom,
+  DepthOfField,
+} from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 //utils
 import {
   concienciaAguaText,
@@ -17,6 +23,43 @@ import {
 
 //modelos
 import { Scene } from "./scene";
+import * as THREE from "three";
+const AudioComponent = ({ url }) => {
+  const { camera, scene } = useThree(); // Accede al contexto de Three.js
+  const audioRef = useRef();
+
+  useEffect(() => {
+    // Crea el listener y el PositionalAudio
+    const listener = new THREE.AudioListener();
+    camera.add(listener); // Añade el listener a la cámara
+
+    const sound = new THREE.PositionalAudio(listener);
+    const audioLoader = new THREE.AudioLoader();
+
+    audioLoader.load(
+      url,
+      (buffer) => {
+        sound.setBuffer(buffer);
+        sound.setLoop(true);
+        sound.setVolume(20); // Ajusta el volumen
+        audioRef.current = sound; // Guarda la referencia
+        sound.play(); // Opcional: inicia reproducción automática
+      },
+      undefined,
+      (error) => console.error("Error al cargar el audio:", error)
+    );
+
+    // Añade el PositionalAudio a la escena
+    scene.add(sound);
+
+    return () => {
+      camera.remove(listener); // Limpia el listener al desmontar
+      scene.remove(sound); // Limpia el sonido al desmontar
+    };
+  }, [camera, scene, url]);
+
+  return null; // Este componente no renderiza nada visible
+};
 
 function CameraAnimation({ viewIndex, positions, tarjets }) {
   const { camera } = useThree();
@@ -73,6 +116,36 @@ const Shortage = () => {
   const [showInfo, setShowInfo] = useState(false); // Nuevo estado para mostrar el mensaje
 
   const [isDamaged, setIsDamaged] = useState(false);
+  const [focusDistance, setFocusDistance] = useState(0.02);
+
+  useEffect(() => {
+    const animateFocus = () => {
+      // Cambiar gradualmente a 2
+      gsap.to({ value: focusDistance }, {
+        value: 1,
+        duration: 1, // Duración de 1 segundo
+        onUpdate: function () {
+          setFocusDistance(this.targets()[0].value);
+        },
+        onComplete: () => {
+          // Regresar gradualmente a 0.02 después de 1 segundo
+          gsap.to({ value: 2 }, {
+            value: 0.02,
+            duration: 1,
+            onUpdate: function () {
+              setFocusDistance(this.targets()[0].value);
+            }
+          });
+        }
+      });
+    };
+
+    const interval = setInterval(() => {
+      animateFocus();
+    }, 10000); // Ejecuta cada 10 segundos
+
+    return () => clearInterval(interval); // Limpia el intervalo al desmontar
+  }, [focusDistance]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -160,6 +233,7 @@ const Shortage = () => {
             saturation={0}
             fade
           />
+          <AudioComponent url="/sound/ocean-waves.mp3" />
           <CameraAnimation
             viewIndex={viewIndex}
             positions={positions}
@@ -183,6 +257,22 @@ const Shortage = () => {
               <meshStandardMaterial color={item.color} />
             </Text3D>
           ))}
+
+          <EffectComposer>
+            {/* Bloom para resaltar los objetos */}
+            <Bloom
+              intensity={0.5} // Intensidad del efecto
+              luminanceThreshold={0.1} // Nivel de brillo mínimo para aplicar el efecto
+              luminanceSmoothing={0.9} // Transición suave
+              blendFunction={BlendFunction.ADD} // Combina el efecto
+            />
+            {/* Depth of Field para un desenfoque sutil */}
+            <DepthOfField
+              focusDistance={focusDistance} // Ajusta la distancia focal
+              focalLength={0.1} // Longitud focal
+              bokehScale={5} // Escala del efecto bokeh
+            />
+          </EffectComposer>
         </Suspense>
       </Canvas>
     </>
