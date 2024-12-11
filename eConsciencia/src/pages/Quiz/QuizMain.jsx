@@ -8,7 +8,8 @@ import useControlStore from '@/store/use-control-store';
 import QuizBlockWorld from '@/pages/Quiz/QuizBlockWorld';
 import GarbagePile from './Garbagepile';
 import GrassSeaLong from './GrassSeaLong';
-
+import TrashBin from './TrashBin';
+import RecycleBin from './RecycleBin';
 const QuizMain = () => {
   const { quizDataCamera, indexQuiz, handleNexQuiz, handlePrevQuiz } = useControlStore();
   const cameraSettings = quizDataCamera[indexQuiz];
@@ -16,6 +17,8 @@ const QuizMain = () => {
   const [visibilityMap, setVisibilityMap] = React.useState({
     GarbagePile: false,
     GrassSeaLong: false,
+    TrashBin: false,
+    RecycleBin: true,
   });
 
   useEffect(() => {
@@ -33,6 +36,26 @@ const QuizMain = () => {
       setVisibilityMap({
         GarbagePile: false,
         GrassSeaLong: false,
+      });
+    }
+  }, [indexQuiz, quizDataCamera]);
+
+  useEffect(() => {
+    const cameraPosition = quizDataCamera[indexQuiz].position;
+    console.log(cameraPosition);
+    // Determina visibilidad según la posición de la cámara
+    if (cameraPosition[0] === 0 && cameraPosition[1] === 0 && cameraPosition[2] === -10) {
+      // CONTAMINATION: Activa los objetos
+      setVisibilityMap({
+        TrashBin: true,
+        RecycleBin: true, 
+       
+      });
+    } else {
+      // En cualquier otra posición: Desactiva los objetos
+      setVisibilityMap({
+        TrashBin: false,
+        RecycleBin: false,
       });
     }
   }, [indexQuiz, quizDataCamera]);
@@ -81,6 +104,12 @@ const QuizMain = () => {
         <GrassSeaLong 
           visible={visibilityMap.GrassSeaLong}
         />  
+        <TrashBin
+        visible={visibilityMap.TrashBin}
+        />
+        <RecycleBin
+        visible={visibilityMap.RecycleBin}
+        />
 
       </Canvas>
     </>
