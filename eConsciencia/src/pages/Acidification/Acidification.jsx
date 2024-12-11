@@ -6,19 +6,29 @@ import { OrbitControls } from "@react-three/drei";
 import Lights from "./lights/Lights";
 import Controls from "./controls/Controls";
 import Title from "./models-3d/Html3D";
-import { useState} from "react";
+import { useCallback, useState, useRef} from "react";
 import Staging from "./staging/Staging";
 import Sensitization from "./Sensitization";
 import Footer from "@/components/Footer/Footer";
 import MultipleCO2Bottles from "./models-3d/CO2BottleGroup";
 import { Physics } from "@react-three/rapier";
+import Video from "./videos/Video";
+import { PositionalAudio } from "@react-three/drei";
+import PostProcessing from "./postprocessing/PostProcessing";
+
 const Acidification = () => {
   const [cameraPosition, setCameraPosition]= useState({x:20, y:2, z:0});
  
+  const audioRef = useRef();
+
+  const handleAudio = useCallback(()=>{
+    audioRef.current.play();
+    audioRef.current.setVolume(7);
+  }, []);
   return (
     <>
       <div className="h-screen overflow-y-auto"> 
-      <Canvas shadows>
+      <Canvas shadows onClick={handleAudio}>
             <Title/>
             <Lights/>
             <Controls cameraPosition={cameraPosition}/>
@@ -29,6 +39,16 @@ const Acidification = () => {
                 setCameraPosition={setCameraPosition}
               />
             </Physics>
+            <Video 
+              name="screen" 
+              position-y={-3}
+              position-x={-4}
+              position-z={0} 
+              scale={6.5}/>
+              <group position={[0, 5, 0]}>
+                <PositionalAudio ref={audioRef} loop url="./sounds/ocean_waves.mp3" distance={2}/>
+              </group>
+              <PostProcessing/>
         </Canvas>
         <Sensitization/>
         <Footer/>
