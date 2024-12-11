@@ -69,6 +69,7 @@ export function Shark(props) {
               geometry={nodes.shark.geometry}
               material={materials.atlas_LPUP}
               skeleton={nodes.shark.skeleton}
+              castShadow
             />
             <primitive object={nodes.Bone} />
             <primitive object={nodes.Bone001} />

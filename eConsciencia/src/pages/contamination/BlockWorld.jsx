@@ -17,7 +17,7 @@ const BlockWorld = (props) => {
       material.metalness = 0.0;  // Aplica metalness
     });
   }, [materials]);
-  const trash1 = useRef();
+
   const { position } = useSpring({
     from: { position: [52.055, 0, 10.11] },
     to: { position: [52.055, 0.05, 10.11] },
@@ -25,8 +25,25 @@ const BlockWorld = (props) => {
     config: { duration: 50 }, // Ajusta la duración para velocidad más rápida/lenta
   });
 
+  const trash1 = useRef();
+  const trash2 = useRef();
+  const trash3 = useRef();
+  const trash4 = useRef();
+
+
+
   const handleTrashClick = useCallback(() =>{
     trash1.current.applyImpulse({x:0, y:20,z:-5}, true);
+  }, [])
+
+  const handleTrashClick2 = useCallback(() =>{
+    trash2.current.applyImpulse({x:0, y:10,z:-5}, true);
+  }, [])
+  const handleTrashClick3 = useCallback(() =>{
+    trash3.current.applyImpulse({x:0, y:15,z:-5}, true);
+  }, [])
+  const handleTrashClick4 = useCallback(() =>{
+    trash4.current.applyImpulse({x:5, y:10,z:-5}, true);
   }, [])
   return (
     <group ref={group} {...props} dispose={null}>
@@ -325,6 +342,7 @@ const BlockWorld = (props) => {
           rotation={[Math.PI / 2, 0, 0]}
           scale={0.01}
           castShadow
+          receiveShadow
         />
         <group
           name="tractor"
@@ -1059,39 +1077,52 @@ const BlockWorld = (props) => {
           rotation={[Math.PI / 2, 0, 0.908]}
           scale={0.01}
         />
-        <mesh
-          name="garbage_bag"
-          geometry={nodes.garbage_bag.geometry}
-          material={materials['atlas_LPUP.033']}
-          position={[43.239, 0, 19.197]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="garbage_open_a"
-          geometry={nodes.garbage_open_a.geometry}
-          material={materials['atlas_LPUP.034']}
-          position={[46.023, 0.45, 23.231]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="garbage_open_b"
-          geometry={nodes.garbage_open_b.geometry}
-          material={materials['atlas_LPUP.035']}
-          position={[44.887, 0.34, 21.583]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <RigidBody ref={trash1}>
+        <RigidBody ref={trash2} type='dynamic'>
+          <mesh
+          onClick={handleTrashClick2}
+            name="garbage_bag"
+            geometry={nodes.garbage_bag.geometry}
+            material={materials['atlas_LPUP.033']}
+            position={[43.239, 0.2, 19.197]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={0.01}
+            castShadow
+          />
+        </RigidBody>
+        <RigidBody ref={trash3} type='dynamic'> 
+          <mesh
+          onClick={handleTrashClick3}
+            name="garbage_open_a"
+            geometry={nodes.garbage_open_a.geometry}
+            material={materials['atlas_LPUP.034']}
+            position={[46.023, 0.4, 23.231]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={0.01}
+            castShadow
+          />
+        </RigidBody>
+        <RigidBody ref={trash4} type='dynamic'> 
+          <mesh
+          onClick={handleTrashClick4}
+            name="garbage_open_b"
+            geometry={nodes.garbage_open_b.geometry}
+            material={materials['atlas_LPUP.035']}
+            position={[44.887, 0.36, 21.583]}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={0.01}
+            castShadow
+          />
+        </RigidBody>
+        <RigidBody ref={trash1} type='dynamic'>
           <mesh
             onClick={handleTrashClick}
             name="garbage_pile"
             geometry={nodes.garbage_pile.geometry}
             material={materials['atlas_LPUP.036']}
-            position={[42.671, 0.32, 22.151]}
+            position={[42.671, 0.32, 24.151]}
             rotation={[Math.PI / 2, 0, 0]}
             scale={0.01}
+            castShadow
           />
         </RigidBody>
 
@@ -1144,70 +1175,7 @@ const BlockWorld = (props) => {
           scale={0.01}
           castShadow
         />
-        <mesh
-          name="seagull"
-          geometry={nodes.seagull.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-48.299, 11.955, 5.757]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull001"
-          geometry={nodes.seagull001.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-45.026, 11.955, 13.598]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull002"
-          geometry={nodes.seagull002.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-48.299, 11.955, 17.211]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull003"
-          geometry={nodes.seagull003.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-45.026, 11.955, 25.052]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull004"
-          geometry={nodes.seagull004.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-42.708, 11.955, 5.076]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull005"
-          geometry={nodes.seagull005.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-39.436, 11.955, 12.916]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull006"
-          geometry={nodes.seagull006.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-42.708, 11.955, 16.53]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
-        <mesh
-          name="seagull007"
-          geometry={nodes.seagull007.geometry}
-          material={materials['atlas_LPUP.043']}
-          position={[-39.436, 11.955, 24.37]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={0.01}
-        />
+        
         
         <group
           name="trash_can"

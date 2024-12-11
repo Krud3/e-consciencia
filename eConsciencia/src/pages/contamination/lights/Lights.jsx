@@ -12,10 +12,10 @@ const Lights = () => {
 
   return (
     <>
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.1} />
       <directionalLight
         ref={dirLightRef}
-        position={[50, 100, 50]} // Ajusta la posición según sea necesario
+        position={[50, 50, 50]} 
         intensity={3}
         castShadow
         shadow-mapSize-width={2048}
