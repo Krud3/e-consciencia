@@ -1,5 +1,5 @@
 // src/pages/contamination/BlockWorldMain.jsx
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback, useRef, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
 import BlockWorld from './BlockWorld';
@@ -10,6 +10,7 @@ import Bienvenida from './texts/Bienvenida';
 import Controls from './controls/Controls';
 import useControlStore from '@/store/use-control-store';
 import { Physics } from '@react-three/rapier';
+import { PositionalAudio } from '@react-three/drei';
 
 const BlockWorldMain = () => {
   const { isPlaying, dataCamera, currentIndex } = useControlStore();
@@ -21,8 +22,45 @@ const BlockWorldMain = () => {
     console.log('cameraSettings', cameraSettings);
   } , [currentIndex]);
 
+  const tractorAudioRef = useRef();
+  const seaAudioRef = useRef();
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
+  const handleAudioToggle = useCallback(() => {
+    if (tractorAudioRef.current && seaAudioRef.current) {
+      if (isAudioPlaying) {
+        tractorAudioRef.current.pause();
+        seaAudioRef.current.pause();
+      } else {
+        tractorAudioRef.current.play();
+        tractorAudioRef.current.setVolume(2);
+
+        seaAudioRef.current.play();
+        seaAudioRef.current.setVolume(10);
+      }
+      setIsAudioPlaying(!isAudioPlaying);
+    }
+  }, [isAudioPlaying]);
+
   return (
     <>
+      <button
+        onClick={handleAudioToggle}
+        style={{
+          position: 'absolute',
+          bottom: '10px',
+          right: '10px',
+          zIndex: 1000,
+          padding: '10px 15px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+      >
+        {isAudioPlaying ? 'Apagar Sonido' : 'Activar Sonido'}
+      </button>
       <Canvas  
         camera={{
           position: cameraSettings.position,
@@ -42,7 +80,13 @@ const BlockWorldMain = () => {
           <BlockWorld />
           <Shark  position={[0.305, -2.899, 54.539]}/>
         </Physics>
-        
+        <group position={[52.055, 0, 10.11]}>
+            <PositionalAudio ref={tractorAudioRef} loop url="/sounds/tractor.mp3" distance={2} />
+        </group>
+
+        <group position={[0.305, -2.899, 60.539]}>
+            <PositionalAudio ref={seaAudioRef} loop url="/sounds/sea.mp3" distance={2} />
+        </group>
         <Controllers />
         {!isPlaying && <Bienvenida />}
       </Canvas>

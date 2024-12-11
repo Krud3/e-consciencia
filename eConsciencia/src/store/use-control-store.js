@@ -85,16 +85,20 @@ const useControlStore = create((set) => ({
       zoom: 1,
     },
     {
+
       position: [0, 0, -30],
       target: [36.455, 5.99, -54.691],
+
       fov: 75,
       near: 0.1,
       far: 1000,
       zoom: 1,
     },
     {
+      
       position: [40, 0, 22],
       target: [42.671, 0.32, 22.151],
+      
       fov: 75,
       near: 0.1,
       far: 1000,
